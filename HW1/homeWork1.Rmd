@@ -1,0 +1,120 @@
+---
+title: "HW 1"
+author: "Adon Rosen"
+date: 'Date: `r Sys.Date()`'
+output: pdf_document
+---
+  
+```{r, echo=F, message=F, warning=FALSE}
+library(knitr)
+opts_knit$set(root.dir='~/Documents/Psych5013/HW1')  #Don't combine this call with any other chunk -especially one that uses file paths.
+```
+
+
+<!-- Set the report-wide options, and point to the external code file. -->
+```{r set_options, echo=F, warning=FALSE}
+# cat("Working directory: ", getwd())
+report_render_start_time <- Sys.time()
+opts_chunk$set(
+  results    = 'show',
+  comment    = NA,
+  tidy       = FALSE,
+  fig.width  = 10,
+  fig.height = 6,
+  fig.path   = 'figure-png/'
+)
+# echoChunks <- FALSE
+options(width=80) #So the output is 50% wider than the default.
+read_chunk("./homeWork1.R") #This allows knitr to call chunks tagged in the underlying *.R file.
+```
+
+```{r load-packages, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+```{r load-data, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+# Question 3
+## a.
+```{r graph-model-1, echo=FALSE, results='show', warning=FALSE, message=FALSE}
+```
+
+## b.
+The y intercept here indicates what a predicted crime rate would be given a poverty rate of 0. Specifically, if there was no poverty rate, then we would expect a violent crime rate of 209.9.
+
+## c.
+Predicted value = 209.9 + 25.5 * 10.7 ; this is equal to `r 209.9 + 25.5 * 10.7`
+
+## d.
+The residual is equal to Y - $\hat{Y}$; here Y = 805 and $\hat{Y}$ = `r 209.9 + 25.5 * 10.7`. So the residual is equal to `r 805 - (209.9 + 25.5 * 10.7)`. This residual indicates we underpredicted the observed value for the state of Massachusetts.
+
+## e.
+If two states differ by 10 in their poverty rates they will differ by 255 in their predicted violent crime rate.
+
+## f.
+First find the minimum value: `r 209.9 + 25.5 * 8`
+
+Now find the maximum value: `r 209.9 + 25.5 * 24.7`
+
+Now find the differences to obtain the range of predicted values: `r (209.9 + 25.5 * 24.7) - (209.9 + 25.5 * 8)`
+
+## g.
+The pearson correlation between poverty rate and violent crime rate is positive. As poverty rate increases, so does violent crime.
+
+# Question 4
+## a. 
+This equation is not realistic, because the data would quickly reach the ceiling of possible college GPA values. For instance a student with a high school GPA of .5 would be predicted to have a college GPA of 4.0, and anyone with a GPA above .5 would be expected to have a GPA greater than 4.0, which is not possible on the provided scale.
+
+## b.
+The slope here indicates that a 1 unit increase in high school GPA yields a .7 increase in an estimated college GPA.
+
+## c.
+1. $\hat{Y}_3$ = `r .5 + .7*3`
+1. $\hat{Y}_4$ = `r .5 + .7*4`
+
+## d.
+Here the y-intercept is = 0; and the slope is 1. This indicates that there is an identical relationship in high school GPA and predicted college GPA.
+
+# Question 10
+## a.
+$\hat{Y} = -37.229 + 42.969{\beta}\_{bedrooms}$
+
+The slope here is 42.969 indicating for every additional bedroom the houses estimated price will increase by 42.969 thousands. THis is a positive relationship such that as one increases so does the other.
+
+## b. 
+1. $\hat{Y}_2$ = `r -37.229 + 42.969*2`
+1. $\hat{Y}_3$ = `r -37.229 + 42.969*3`
+1. $\hat{Y}_4$ = `r -37.229 + 42.969*4`
+
+## c.
+The $\hat{Y}_3$ = `r -37.229 + 42.969*3` whereas the observed value is 48.5. The residual is equal to $Y - \hat{Y}$ which equals to `r 48.5 - (-37.229 + 42.969*3)`
+
+## d. 
+In order to calculate the corellation from the slope first multiply the slope of the regression line by the standard deviation of X and then divide by the standard deviation of Y.
+
+Slope: 42.969
+
+SDx: 0.6070
+
+SDy: 44.1841
+
+Formula: (Slope * SDx) / SDy = `r (42.969 * 0.6070) / 44.1841`
+
+## e.
+The coefficient of determination is: 0.3484 ; this means that our model can explain roughly 34% of the variation observed in the outcome
+
+## f.
+** I need to finish this question later**
+
+
+
+# Question 12
+## a.
+
+
+
+
+
+
+# Question 35
+The answer is B
