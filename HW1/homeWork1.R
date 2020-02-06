@@ -33,3 +33,10 @@ out.plot
 
 # ---- train-model-12 ----------------------------------------------------------------------
 model.2 <- lm(Murder_Rate~Violent_Crime_Rate, data=table9_1)
+summary(model.2)
+
+# ---- pred-dc-12 ----------------------------------------------------------------------
+pred.dc <- predict(model.2, newdata=table9_1[which(table9_1$State=='DC'),])
+
+# ---- pred-612.8-12 ----------------------------------------------------------------------
+out.pred <- coef(model.2)[1] + 612.8 * coef(model.2)[2]

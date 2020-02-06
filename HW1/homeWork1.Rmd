@@ -104,17 +104,77 @@ Formula: (Slope * SDx) / SDy = `r (42.969 * 0.6070) / 44.1841`
 The coefficient of determination is: 0.3484 ; this means that our model can explain roughly 34% of the variation observed in the outcome
 
 ## f.
-** I need to finish this question later**
+The standard error for the ${\beta}\_{bedrooms}$ is equal to 6.160 - this value refelects the distribution of the sampiling staticstic.
+
+## g.
+Here the p value for ${\beta}\_{bedrooms}$ = 0.0001, so we reject the null hypothesis that ${\beta}\_{bedrooms}$ = 0 and conclude that that there is a non zero relationship between bedrooms and predicted house cost.
+
+## h.
+The 95% confidence interval for the coefficient is equal to 42.969 +/- `r qt(.95, df=91) * 6.160`. This value indiciates if we were to repeat this sampiling procedure an infinite number of times we would expect 95% of the obtained coefficients to fall within this range.
+
+## i.
+$\hat{Y}_{4-upper}$=`r (42.969 + (qt(.95, df=91) * 6.160)) * 4 - 37.229`
+
+$\hat{Y}_{4-lower}$=`r (42.969 - (qt(.95, df=91) * 6.160)) * 4 - 37.229`
+
+$\hat{Y}_{2-upper}$=`r (42.969 + (qt(.95, df=91) * 6.160)) * 2 - 37.229`
+
+$\hat{Y}_{2-lower}$=`r (42.969 - (qt(.95, df=91) * 6.160)) * 2 - 37.229`
+
+
+## j.
+The Root MSE is the standard deviation of the residuals. SO on average we expect the residual to be 35.86120 units away from the rpedicted value
 
 
 
 # Question 12
 ## a.
+```{r graph-model-12, echo=FALSE, results='show', warning=FALSE, message=FALSE}
+```
+There appears to be a pos relationship between these two variables
 
+## b.
+```{r train-model-12, echo=FALSE, results='show', warning=FALSE, message=FALSE}
+```
 
+## c.
+```{r pred-dc-12, echo=FALSE, results='show', warning=FALSE, message=FALSE}
+```
 
+The $\hat{Y}_{DC}$ = `r pred.dc`
+
+This means we predict there to be about `r pred.dc` murder rate for DC
+
+## d.
+```{r pred-612.8-12, echo=FALSE, results='show', warning=FALSE, message=FALSE}
+```
+The $\hat{Y}_{612.8}$ = `r out.pred`
+
+## e.
+In order to calculate the corellation from the slope first multiply the slope of the regression line by the standard deviation of X and then divide by the standard deviation of Y.
+
+Slope: `r coef(model.2)[2]`
+
+SDx: 441.1
+
+SDy: 10.7
+
+Formula: (Slope * SDx) / SDy = `r (coef(model.2)[2] * 441.1) / 10.7`
+
+## f.
 
 
 
 # Question 35
-The answer is B
+The answer is B - A correlation of .3 shares has a coefficient of determintation of .09
+
+# Question 37
+The answer is G - Both a coefficit and correlation are affected by outliers
+
+# Question 38
+Linear regression has a set of assumptions which include:
+
+1. There is a linear relationship between Y and X
+1. The error are homeoscedastic
+1. The error are normally distributed
+1. The sample observations are selected randomly and independent of each other
