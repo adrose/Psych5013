@@ -7,7 +7,7 @@ output: pdf_document
   
 ```{r, echo=F, message=F, warning=FALSE}
 library(knitr)
-opts_knit$set(root.dir='~/GitHub/Psych5013/Quiz1/')  #Don't combine this call with any other chunk -especially one that uses file paths.
+opts_knit$set(root.dir='~/Documents/Psych5013/Quiz1/')  #Don't combine this call with any other chunk -especially one that uses file paths.
 ```
 
 
@@ -46,6 +46,7 @@ SE(Slope) = 0.200 Root MSE = 11.38
 
 ## a.
 Parameters:
+
 1. ${\beta}_0$ = 142.68 = The predicted muscle mass in a women when her X value, age is equal to 0
 1. ${\beta}_1$ = -1.47 = The change in muscle mass for every one unit change in age
 
@@ -140,3 +141,46 @@ ${\alpha}=0.05$
 We conclude that year is a significant predictor (t=3.50, p<0.05) and reject that null hypothesis that the relationship between year and graduation rate is not 0.
 
 ## g. 
+
+Conditional standard deviation is equivalent to $\frac{1}{n}\Sigma_{n=1}^{i}(y-\hat{y})^2$ = MSE. Taking the root os the MSE gives you the conditional SD. Here the root mean squared error is equal to 1.13982, therefore the conditional SD is also 1.13982.
+
+## h. 
+
+This study had 6 observations, assuming all of the observations were unqiue, this study had 6 years worth of data.
+
+## i.
+
+The value 15.93 is the sum of squares for the model. Another phrase for this is the explained sum of squares (ESS). ESS reflects how much of the variance the model explains from the original total sum of squares.
+
+## j. 
+
+While the model reported here suggests a positive relationship between year and graduation rate, this does not restirct the data to only allowing positive increases across years in graduation rates. As long as the model fit displays homoskedacity this is not a concern for the model that was fitted.
+
+## k. 
+${\beta}_{year}$ = 0.95429
+
+$SD_x$ = `r sd(c(1,2,3,4,5,6))`
+
+$SD_y$ = `r sqrt(21.13333*(1/5))`
+
+${\beta}_{standardized} = {\beta}\frac{{SD}_x}{{SD}_y}$ = `r 0.95429 * (1.870829/2.065559)`
+
+# Question 3
+```{r q-3-data, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+## a. 
+```{r q-3-a, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+## b. 
+```{r q-3-b, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+## c.
+```{r q-3-c, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+## d. 
+
+# Question 4

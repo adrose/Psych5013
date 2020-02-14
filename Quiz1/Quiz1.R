@@ -6,7 +6,7 @@ library("foreign")
 library("knitr")
 library("kableExtra")
 library("reshape2")
-setwd("~/GitHub/Psych5013/Quiz1/")
+setwd("~/Documents/Psych5013/Quiz1/")
 
 # ---- q-3-data --------------------------------------------------------
 x <- c(59,49,75,54,78,56,60,82,69,83,88,94,47,65,89,70)
