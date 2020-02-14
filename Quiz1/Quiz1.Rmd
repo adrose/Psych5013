@@ -1,0 +1,142 @@
+---
+title: "HW 1"
+author: "Adon Rosen"
+date: 'Date: `r Sys.Date()`'
+output: pdf_document
+---
+  
+```{r, echo=F, message=F, warning=FALSE}
+library(knitr)
+opts_knit$set(root.dir='~/GitHub/Psych5013/Quiz1/')  #Don't combine this call with any other chunk -especially one that uses file paths.
+```
+
+
+<!-- Set the report-wide options, and point to the external code file. -->
+```{r set_options, echo=F, warning=FALSE}
+# cat("Working directory: ", getwd())
+report_render_start_time <- Sys.time()
+opts_chunk$set(
+  results    = 'show',
+  comment    = NA,
+  tidy       = FALSE,
+  fig.width  = 10,
+  fig.height = 6,
+  fig.path   = 'figure-png/'
+)
+# echoChunks <- FALSE
+options(width=80) #So the output is 50% wider than the default.
+read_chunk("./Quiz1.R") #This allows knitr to call chunks tagged in the underlying *.R file.
+```
+
+
+```{r load-packages, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+
+# Question 1
+A person’s muscle mass is expected to decrease with age.  To explore this relationship in women, a nutritionist randomly selected 4 women from each 10-year age group, beginning with age 40 and ending with age 79, resulting in a total sample size of n=16.  Some results follow, where X is the age, and Y is a measure of the muscle mass.  Assume a simple linear regression model is appropriate.  
+For these data:
+
+Mean( X) = 61.69  SD(X) = 14.67		
+Mean(Y)  = 52.21  SD(Y) = 24.16
+
+y-hat = 142.68  – 1.47 *X  
+
+SE(Slope) = 0.200 Root MSE = 11.38 
+
+## a.
+Parameters:
+1. ${\beta}_0$ = 142.68 = The predicted muscle mass in a women when her X value, age is equal to 0
+1. ${\beta}_1$ = -1.47 = The change in muscle mass for every one unit change in age
+
+## b.
+$\hat{Y}_{63} = 142.68 - 1.47*63$ = `r 142.68 - 1.47*63`
+
+## c.
+In order to calculate the corellation from the slope first multiply the slope of the regression line by the standard deviation of X and then divide by the standard deviation of Y.
+
+Slope: -1.47
+
+SDx: 14.67
+
+SDy: 24.16
+
+r = (Slope * SDx) / SDy = `r (-1.47 * 14.67) / 24.16`
+
+## d.
+State our hypotheses:
+
+$H_0: r = 0$
+
+$H_a: r \neq 0$
+
+${\alpha}=0.05$
+
+We would like to calculate the t value of the correlation. The t value's formula is: $t = \frac{r\sqrt(n-2)}{\sqrt{1-r^2}}$
+
+t = `r (-0.8925869 * sqrt(14)) / sqrt(1 - -0.8925869* -0.8925869)`
+
+p = `r 2*pt(-abs((-0.8925869 * sqrt(14)) / sqrt(1 - -0.8925869* -0.8925869)),df=14)`
+
+Given this p value, we reject the null hypothesis and conclude there is a non-zero relationship between age and muscle mass.
+
+## e. 
+The 95% C.I. for ${\beta}_1$ = -1.47 +/- `r round(qt(p = .975, df=14) * .2, 4)`; [`r -1.47-round(qt(p = .975, df=14) * .2, 4)`,`r -1.47+round(qt(p = .975, df=14) * .2, 4)`]
+
+I will interpret this later
+
+## f. 
+The 95% C.I. for a participant with an age of 63 is equal to [`r 142.68 - 1.899*63`,`r 142.68 - 1.041*63`]. 
+
+I will interpret this later
+
+## g.
+The residual is equal to $Y - \hat{Y}$ = 45 - `r 142.68 - 1.47*60` = `r 45 - (142.68 - 1.47*60)`
+
+## h. 
+PRE = `r -0.8925869 * -0.8925869`
+
+${\beta}_{standardized} = {\beta}\frac{{SD}_x}{{SD}_y}$ = `r -1.47 * (14.67/24.16)`
+
+Here we see that we explain roughly `r round(-0.8925869 * -0.8925869, 4)` percent of the total variance in the outcome. Furthermore, it appears that the that the standardized coefficient between age and muscle mass is: `r -1.47 * (14.67/24.16)` which suggests a very strong relationship between these two variables.
+
+## i. 
+If two women differ in age by 10 years the predicted difference in muscle mass will be -14.7 units.
+
+## j.
+It is difficult to tell if the linear assumption holds with these data. However the provided model fits the data very well.
+
+# Question 2
+The following SAS output contains an analysis in which 6-year graduation rates were collected over a 6-year period and analyzed for trends.   The response variable Y is graduation rate (measured as a percentage). The explanatory variable X is year (beginning with year 1)
+
+## a. 
+$\hat{Y}=61.52667 + 0.95429*year$
+
+## b. 
+$\hat{Y}_6=61.52667 + 0.95429*6$ = `r 61.52667 + 0.95429*6`
+
+## c.
+The residual is equal to $Y - \hat{Y}$ = 67.8 - `r 61.52667 + 0.95429*5` = `r 67.8 - (61.52667 + 0.95429*5)`
+
+Here the residual is 1.5, meaning the value was underpredicted by 1.5%.
+
+## d.
+PRE = 0.7541 This PRE suggests an excellent model fit.
+
+## e. 
+The 95% C.I. for ${\beta}_1$ = 0.95429 +/- `r round(qt(p = .975, df=4) * 0.27247, 4)`; [`r 0.95429-round(qt(p = .975, df=4) * 0.27247, 4)`,`r 0.95429+round(qt(p = .975, df=4) * 0.27247, 4)`]
+
+I will interpret this later
+
+## f.
+State our hypotheses:
+
+$H_0: {\beta}_{year} = 0$
+
+$H_a: {\beta}_{year} \neq 0$
+
+${\alpha}=0.05$
+
+We conclude that year is a significant predictor (t=3.50, p<0.05) and reject that null hypothesis that the relationship between year and graduation rate is not 0.
+
+## g. 
