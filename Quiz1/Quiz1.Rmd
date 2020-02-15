@@ -1,5 +1,5 @@
 ---
-title: "HW 1"
+title: "Quiz 1"
 author: "Adon Rosen"
 date: 'Date: `r Sys.Date()`'
 output: pdf_document
@@ -7,7 +7,7 @@ output: pdf_document
   
 ```{r, echo=F, message=F, warning=FALSE}
 library(knitr)
-opts_knit$set(root.dir='~/Documents/Psych5013/Quiz1/')  #Don't combine this call with any other chunk -especially one that uses file paths.
+opts_knit$set(root.dir='./')  #Don't combine this call with any other chunk -especially one that uses file paths.
 ```
 
 
@@ -37,7 +37,7 @@ read_chunk("./Quiz1.R") #This allows knitr to call chunks tagged in the underlyi
 A person’s muscle mass is expected to decrease with age.  To explore this relationship in women, a nutritionist randomly selected 4 women from each 10-year age group, beginning with age 40 and ending with age 79, resulting in a total sample size of n=16.  Some results follow, where X is the age, and Y is a measure of the muscle mass.  Assume a simple linear regression model is appropriate.  
 For these data:
 
-Mean( X) = 61.69  SD(X) = 14.67		
+Mean(X) = 61.69  SD(X) = 14.67		
 Mean(Y)  = 52.21  SD(Y) = 24.16
 
 y-hat = 142.68  – 1.47 *X  
@@ -54,7 +54,7 @@ Parameters:
 $\hat{Y}_{63} = 142.68 - 1.47*63$ = `r 142.68 - 1.47*63`
 
 ## c.
-In order to calculate the corellation from the slope first multiply the slope of the regression line by the standard deviation of X and then divide by the standard deviation of Y.
+In order to calculate the correlation from the slope first multiply the slope of the regression line by the standard deviation of X and then divide by the standard deviation of Y.
 
 Slope: -1.47
 
@@ -105,7 +105,7 @@ Here we see that we explain roughly `r round(-0.8925869 * -0.8925869, 4)` percen
 If two women differ in age by 10 years the predicted difference in muscle mass will be -14.7 units.
 
 ## j.
-It is difficult to tell if the linear assumption holds with these data. However the provided model fits the data very well.
+It is difficult to tell if the linear assumption holds with these data. However, the provided model fits the data very well, thus the assumption that model provides some utility is tenable.
 
 # Question 2
 The following SAS output contains an analysis in which 6-year graduation rates were collected over a 6-year period and analyzed for trends.   The response variable Y is graduation rate (measured as a percentage). The explanatory variable X is year (beginning with year 1)
@@ -142,11 +142,11 @@ We conclude that year is a significant predictor (t=3.50, p<0.05) and reject tha
 
 ## g. 
 
-Conditional standard deviation is equivalent to $\frac{1}{n}\Sigma_{n=1}^{i}(y-\hat{y})^2$ = MSE. Taking the root os the MSE gives you the conditional SD. Here the root mean squared error is equal to 1.13982, therefore the conditional SD is also 1.13982.
+Conditional standard deviation is equivalent to $\frac{1}{n}\Sigma_{n=1}^{i}(y-\hat{y})^2$ = MSE. Taking the root of the MSE gives you the conditional SD. Here the root mean squared error is equal to 1.13982, therefore the conditional SD is also 1.13982.
 
 ## h. 
 
-This study had 6 observations, assuming all of the observations were unqiue, this study had 6 years worth of data.
+This study had 6 observations, assuming all of the observations were unique, this study had 6 years worth of data.
 
 ## i.
 
@@ -154,7 +154,7 @@ The value 15.93 is the sum of squares for the model. Another phrase for this is 
 
 ## j. 
 
-While the model reported here suggests a positive relationship between year and graduation rate, this does not restirct the data to only allowing positive increases across years in graduation rates. As long as the model fit displays homoskedacity this is not a concern for the model that was fitted.
+While the model reported here suggests a positive relationship between year and graduation rate, this does not restrict the data to only positive increases across years in graduation rates. As long as the model fit displays homoscedastic this is not a concern for the model that was fitted.
 
 ## k. 
 ${\beta}_{year}$ = 0.95429
@@ -166,6 +166,17 @@ $SD_y$ = `r sqrt(21.13333*(1/5))`
 ${\beta}_{standardized} = {\beta}\frac{{SD}_x}{{SD}_y}$ = `r 0.95429 * (1.870829/2.065559)`
 
 # Question 3
+A criminologist studying the relationship between population density and robbery rates in medium-sized US cities collected the following data for a random sample of 16 cities; X is the population density of the city (number of people per unit area) and Y is the robbery rate last year (number of robberies per 100,000 people).  Assume that a simple linear regression model is appropriate.
+
+I: 	1	2	3	4	5	6	7	8
+X:	59	49	75	54	78	56	60	82
+Y;	209	180	195	192	215	197	208	189
+     
+I:	9	10	11	12	13	14	15	16
+X:	69	83	88	94	47	65	89	70
+Y:	213	201	214	212	205	186	200	204
+
+
 ```{r q-3-data, echo=FALSE, results='show', message=FALSE, warning=FALSE}
 ```
 
@@ -182,5 +193,99 @@ ${\beta}_{standardized} = {\beta}\frac{{SD}_x}{{SD}_y}$ = `r 0.95429 * (1.870829
 ```
 
 ## d. 
+Here the $\beta_{popdens}$ is equal to 0.2616 which suggests for every unit increase in population density, there is a 0.2616 unit increase in robbery rate.
+
+## e.
+The proportion reduction of error here is 0.1332, which suggests a small-medium effect between these two variables. This value tells us that we reduce this proportion in the error compared to a model that only includes an intercept term.
+
+## f.
+We want to calculate the confidence interval for the mean prediction. The associated formula is:
+
+$\hat{Y}{\pm}t_{14}*\sqrt{MSE}*\sqrt{\frac{1}{n}\frac{(X_i-\overline{X})^2}{SS_x}}$
+
+Values will be:
+
+$\hat{Y}$ = `r predict(mod)[16]`
+
+$t_{14}=$ `r qt(p = .975, df=14)`
+
+$MSE=$ `r mse(mod)`
+
+$n=$ 16
+
+$X_i=$ 70
+
+$\overline{X}=$ `r mean(q.three.dat$x)`
+
+$SS_x=$ `r var(q.three.dat$x) * 15`
+
+$C.I.M_{manual}$ = [`r round(predict(mod)[16] - (qt(p = .975, df=14)*sqrt(mse(mod)) * sqrt((1/16)+((70-mean(q.three.dat$x))^2/(var(q.three.dat$x) * 15)))),1)`, `r round(predict(mod)[16] + (qt(p = .975, df=14)*sqrt(mse(mod)) * sqrt((1/16)+((70-mean(q.three.dat$x))^2/(var(q.three.dat$x) * 15)))),1)`]
+
+
+For safety, lets compare these estimates to the R predict function estimates:
+
+$C.I.M_{rPredict}$ = [`r round(predict(mod, interval="confidence")[16,2], 1)`, `r round(predict(mod, interval="confidence")[16,3],1)`]
+
+It appears we have generall consensus, although some diagreement at the tens decimal place...
+
+## g. 
+We want to calculate the confidence interval for an individual predicition. The associated formula is:
+
+$\hat{Y}{\pm}t_{14}*\sqrt{MSE}*\sqrt{\frac{1}{n}\frac{(X_i-\overline{X})^2}{SS_x}}$
+
+Values will be:
+
+$\hat{Y}$ = `r predict(mod)[12]`
+
+$t_{14}=$ `r qt(p = .975, df=14)`
+
+$MSE=$ `r mse(mod)`
+
+$n=$ 16
+
+$X_i=$ 94
+
+$\overline{X}=$ `r mean(q.three.dat$x)`
+
+$SS_x=$ `r var(q.three.dat$x) * 15`
+
+$C.I.M_{manual}$ = [`r round(predict(mod)[16] - (qt(p = .975, df=14)*sqrt(mse(mod)) * sqrt((1/16)+((94-mean(q.three.dat$x))^2/(var(q.three.dat$x) * 15)))),4)`, `r round(predict(mod)[16] + (qt(p = .975, df=14)*sqrt(mse(mod)) * sqrt((1/16)+((94-mean(q.three.dat$x))^2/(var(q.three.dat$x) * 15)))),4)`]
+
+For safety, lets compare these estimates to the R predict function estimates:
+
+$C.I.M_{rPredict}$ = [`r predict(mod, interval="confidence")[12,2]`, `r predict(mod, interval="confidence")[12,3]`]
+
+It appears we have no consensus, although some diagreement at the tens decimal place...
+
+## h.
+Here we want to estimate the 95% confidence interval for the slope of the regression model.
+
+In order to perform this we are going to use the following formula:
+
+$\hat\beta{_1} \pm t_{\alpha/2;df=n-2}*se(\hat\beta_{1})$
+
+With the standard error of $\hat\beta_1$ calculated as:
+
+se = $\sqrt{\frac{MSE}{\Sigma^n_{i=1}(x_i-\overline{x})^2}}$
+
+Values will be:
+
+$\beta_{1} =$ 0.2616
+
+$t_{14}=$ `r qt(p = .975, df=14)`
+
+$MSE = $ `r mse(mod)`
+
+$SS_x=$ `r var(q.three.dat$x) * 15`
+
+Accordingly, the 95% CI for $\beta_1$ is equal to [`r round(confint(mod)[2,1], 2)`, `r round(confint(mod)[2,2], 2)`]
+
+## i.
+```{r q-3-i, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+As we observe from the preceding plots, these data appear to display homoscedastic errors, they are independent samples, and they have also been randomly sampled. These characteristics taken together means the linear regression model fitted here is appropriate for the data.
 
 # Question 4
+Model DF: 1
+Model SS: 
