@@ -92,7 +92,7 @@ The 95% C.I. for a participant with an age of 63 is equal to [`r 142.68 - 1.899*
 I will interpret this later
 
 ## g.
-The residual is equal to $Y - \hat{Y}$ = 45 - `r 142.68 - 1.47*60` = `r 45 - (142.68 - 1.47*60)`
+The residual is equal to $Y - \hat{Y}$ = 45 - `r 142.68 - 1.47*60` = `r (142.68 - 1.47*60) - 45`
 
 ## h. 
 PRE = `r -0.8925869 * -0.8925869`
@@ -117,12 +117,12 @@ $\hat{Y}=61.52667 + 0.95429*year$
 $\hat{Y}_6=61.52667 + 0.95429*6$ = `r 61.52667 + 0.95429*6`
 
 ## c.
-The residual is equal to $Y - \hat{Y}$ = 67.8 - `r 61.52667 + 0.95429*5` = `r 67.8 - (61.52667 + 0.95429*5)`
+The residual is equal to $Y - \hat{Y}$ = 67.8 - `r 61.52667 + 0.95429*5` = `r (61.52667 + 0.95429*5) - 67.8`
 
 Here the residual is 1.5, meaning the value was underpredicted by 1.5%.
 
 ## d.
-PRE = 0.7541 This PRE suggests an excellent model fit.
+PRE = 0.7541 This PRE suggests that the additional variable yields a .7541 proportional reduction in error across this model and the null model. 
 
 ## e. 
 The 95% C.I. for ${\beta}_1$ = 0.95429 +/- `r round(qt(p = .975, df=4) * 0.27247, 4)`; [`r 0.95429-round(qt(p = .975, df=4) * 0.27247, 4)`,`r 0.95429+round(qt(p = .975, df=4) * 0.27247, 4)`]
@@ -287,5 +287,33 @@ Accordingly, the 95% CI for $\beta_1$ is equal to [`r round(confint(mod)[2,1], 2
 As we observe from the preceding plots, these data appear to display homoscedastic errors, they are independent samples, and they have also been randomly sampled. These characteristics taken together means the linear regression model fitted here is appropriate for the data.
 
 # Question 4
+Analysis of Variance
 Model DF: 1
-Model SS: 
+
+Model SS: 9.874148
+
+Model MSE: 9.874148
+
+Model F: 53.27865
+
+Error DF: 48
+
+Error SS: 8.895852
+
+Error MSE: 0.1853303
+
+Corrected Total DF: 49
+
+R-square: 0.5260601
+
+Parameter Estimates
+
+intercept standard error: 0.1793638
+
+intercept standardized estimate: 0
+
+size parameter estimate: 0.414932
+
+Pr > |t|: `r pt(7.3, 48, lower.tail = F)`
+
+size standardized estimate: 0.7253
