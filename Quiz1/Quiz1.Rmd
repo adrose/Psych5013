@@ -32,6 +32,8 @@ read_chunk("./Quiz1.R") #This allows knitr to call chunks tagged in the underlyi
 ```{r load-packages, echo=FALSE, results='show', message=FALSE, warning=FALSE}
 ```
 
+```{r declare-functions, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
 
 # Question 1
 A person’s muscle mass is expected to decrease with age.  To explore this relationship in women, a nutritionist randomly selected 4 women from each 10-year age group, beginning with age 40 and ending with age 79, resulting in a total sample size of n=16.  Some results follow, where X is the age, and Y is a measure of the muscle mass.  Assume a simple linear regression model is appropriate.  
@@ -75,7 +77,7 @@ ${\alpha}=0.05$
 
 We would like to calculate the t value of the correlation. The t value's formula is: $t = \frac{r\sqrt(n-2)}{\sqrt{1-r^2}}$
 
-t = `r (-0.8925869 * sqrt(14)) / sqrt(1 - -0.8925869* -0.8925869)`
+t = `r (-0.8925869 * sqrt(14)) / sqrt(1 - -0.8925869*-0.8925869)`
 
 p = `r 2*pt(-abs((-0.8925869 * sqrt(14)) / sqrt(1 - -0.8925869* -0.8925869)),df=14)`
 
@@ -84,15 +86,15 @@ Given this p value, we reject the null hypothesis and conclude there is a non-ze
 ## e. 
 The 95% C.I. for ${\beta}_1$ = -1.47 +/- `r round(qt(p = .975, df=14) * .2, 4)`; [`r -1.47-round(qt(p = .975, df=14) * .2, 4)`,`r -1.47+round(qt(p = .975, df=14) * .2, 4)`]
 
-I will interpret this later
+This confidence interval suggests that if this sampling procedure was repeated, we would expect the standard deviation of the slope estimate to be about `r round(qt(p = .975, df=14) * .2, 4)`. 
 
 ## f. 
 The 95% C.I. for a participant with an age of 63 is equal to [`r 142.68 - 1.899*63`,`r 142.68 - 1.041*63`]. 
 
-I will interpret this later
+This confidence interval suggests that if this sampling procedure was repeated, we would expect the predicted mean to fall between the range stated above in 95% samples. 
 
 ## g.
-The residual is equal to $Y - \hat{Y}$ = 45 - `r 142.68 - 1.47*60` = `r (142.68 - 1.47*60) - 45`
+The residual is equal to $Y - \hat{Y}$ = 45 - `r 142.68 - 1.47*60` = `r 45 - (142.68 - 1.47*60)`
 
 ## h. 
 PRE = `r -0.8925869 * -0.8925869`
@@ -102,10 +104,10 @@ ${\beta}_{standardized} = {\beta}\frac{{SD}_x}{{SD}_y}$ = `r -1.47 * (14.67/24.1
 Here we see that we explain roughly `r round(-0.8925869 * -0.8925869, 4)` percent of the total variance in the outcome. Furthermore, it appears that the that the standardized coefficient between age and muscle mass is: `r -1.47 * (14.67/24.16)` which suggests a very strong relationship between these two variables.
 
 ## i. 
-If two women differ in age by 10 years the predicted difference in muscle mass will be -14.7 units.
+If two women differ in age by 10 years the predicted difference in muscle mass will be abs[14.7] units.
 
 ## j.
-It is difficult to tell if the linear assumption holds with these data. However, the provided model fits the data very well, thus the assumption that model provides some utility is tenable.
+It is difficult to tell if the linear assumption holds with these data. However, the provided model fits the data very well, thus the assumption that the linear model fitted here provides some utility is tenable.
 
 # Question 2
 The following SAS output contains an analysis in which 6-year graduation rates were collected over a 6-year period and analyzed for trends.   The response variable Y is graduation rate (measured as a percentage). The explanatory variable X is year (beginning with year 1)
@@ -117,17 +119,19 @@ $\hat{Y}=61.52667 + 0.95429*year$
 $\hat{Y}_6=61.52667 + 0.95429*6$ = `r 61.52667 + 0.95429*6`
 
 ## c.
-The residual is equal to $Y - \hat{Y}$ = 67.8 - `r 61.52667 + 0.95429*5` = `r (61.52667 + 0.95429*5) - 67.8`
+The residual is equal to $Y - \hat{Y}$ = 67.8 - `r 61.52667 + 0.95429*5` = `r 67.8 - (61.52667 + 0.95429*5)`
 
 Here the residual is 1.5, meaning the value was underpredicted by 1.5%.
 
 ## d.
-PRE = 0.7541 This PRE suggests that the additional variable yields a .7541 proportional reduction in error across this model and the null model. 
+PRE = 0.7541 
+
+This PRE suggests that the additional variable yields a .7541 proportional reduction in error across this model and the null model. 
 
 ## e. 
 The 95% C.I. for ${\beta}_1$ = 0.95429 +/- `r round(qt(p = .975, df=4) * 0.27247, 4)`; [`r 0.95429-round(qt(p = .975, df=4) * 0.27247, 4)`,`r 0.95429+round(qt(p = .975, df=4) * 0.27247, 4)`]
 
-I will interpret this later
+This confidence interval suggests that if this sampling procedure was repeated, we would expect the standard deviation of the slope estimate to be about `r round(qt(p = .975, df=4) * 0.27247, 4)`.
 
 ## f.
 State our hypotheses:
@@ -138,11 +142,11 @@ $H_a: {\beta}_{year} \neq 0$
 
 ${\alpha}=0.05$
 
-We conclude that year is a significant predictor (t=3.50, p<0.05) and reject that null hypothesis that the relationship between year and graduation rate is not 0.
+We conclude that year is a significant predictor (t=3.50, p<0.05) and reject the null hypothesis that the relationship between year and graduation rate is 0.
 
 ## g. 
 
-Conditional standard deviation is equivalent to $\frac{1}{n}\Sigma_{n=1}^{i}(y-\hat{y})^2$ = MSE. Taking the root of the MSE gives you the conditional SD. Here the root mean squared error is equal to 1.13982, therefore the conditional SD is also 1.13982.
+Conditional variance is equivalent to $\frac{1}{n}\Sigma_{n=1}^{i}(y-\hat{y})^2$ = MSE. Taking the root of the MSE gives you the conditional SD. Here the root mean squared error is equal to 1.13982, therefore the conditional SD is also 1.13982.
 
 ## h. 
 
@@ -154,7 +158,7 @@ The value 15.93 is the sum of squares for the model. Another phrase for this is 
 
 ## j. 
 
-While the model reported here suggests a positive relationship between year and graduation rate, this does not restrict the data to only positive increases across years in graduation rates. As long as the model fit displays homoscedastic this is not a concern for the model that was fitted.
+While the model reported here suggests a positive relationship between year and graduation rate, this does not restrict the data to only positive increases across years in graduation rates. As long as the model fit displays homoscedastic errors this is not a concern for the model that was fitted.
 
 ## k. 
 ${\beta}_{year}$ = 0.95429
@@ -180,17 +184,23 @@ Y:	213	201	214	212	205	186	200	204
 ```{r q-3-data, echo=FALSE, results='show', message=FALSE, warning=FALSE}
 ```
 
+
 ## a. 
 ```{r q-3-a, echo=FALSE, results='show', message=FALSE, warning=FALSE}
 ```
+
+The fitted regression model is: $\hat{Y}_i = 182.9725 + 0.2616*X_i$
 
 ## b. 
 ```{r q-3-b, echo=FALSE, results='show', message=FALSE, warning=FALSE}
 ```
 
+The estimated correlation value is: `r cor.val`
+
 ## c.
 ```{r q-3-c, echo=FALSE, results='show', message=FALSE, warning=FALSE}
 ```
+The fitted standardized regression model is:  $\hat{Y}_i = 0 + 0.365*X_i$
 
 ## d. 
 Here the $\beta_{popdens}$ is equal to 0.2616 which suggests for every unit increase in population density, there is a 0.2616 unit increase in robbery rate.
@@ -209,7 +219,7 @@ $\hat{Y}$ = `r predict(mod)[16]`
 
 $t_{14}=$ `r qt(p = .975, df=14)`
 
-$MSE=$ `r mse(mod)`
+MSE= `r mse(mod)`
 
 $n=$ 16
 
@@ -219,19 +229,15 @@ $\overline{X}=$ `r mean(q.three.dat$x)`
 
 $SS_x=$ `r var(q.three.dat$x) * 15`
 
-$C.I.M_{manual}$ = [`r round(predict(mod)[16] - (qt(p = .975, df=14)*sqrt(mse(mod)) * sqrt((1/16)+((70-mean(q.three.dat$x))^2/(var(q.three.dat$x) * 15)))),1)`, `r round(predict(mod)[16] + (qt(p = .975, df=14)*sqrt(mse(mod)) * sqrt((1/16)+((70-mean(q.three.dat$x))^2/(var(q.three.dat$x) * 15)))),1)`]
+```{r q-3-f, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
 
-
-For safety, lets compare these estimates to the R predict function estimates:
-
-$C.I.M_{rPredict}$ = [`r round(predict(mod, interval="confidence")[16,2], 1)`, `r round(predict(mod, interval="confidence")[16,3],1)`]
-
-It appears we have generall consensus, although some diagreement at the tens decimal place...
+C.I.M = [`r clm.vals[1]`, `r clm.vals[2]`]
 
 ## g. 
 We want to calculate the confidence interval for an individual predicition. The associated formula is:
 
-$\hat{Y}{\pm}t_{14}*\sqrt{MSE}*\sqrt{\frac{1}{n}\frac{(X_i-\overline{X})^2}{SS_x}}$
+$\hat{Y}{\pm}t_{14}*\sqrt{MSE}*\sqrt{1+\frac{1}{n}\frac{(X_i-\overline{X})^2}{SS_x}}$
 
 Values will be:
 
@@ -239,7 +245,7 @@ $\hat{Y}$ = `r predict(mod)[12]`
 
 $t_{14}=$ `r qt(p = .975, df=14)`
 
-$MSE=$ `r mse(mod)`
+MSE= `r mse(mod)`
 
 $n=$ 16
 
@@ -249,20 +255,17 @@ $\overline{X}=$ `r mean(q.three.dat$x)`
 
 $SS_x=$ `r var(q.three.dat$x) * 15`
 
-$C.I.M_{manual}$ = [`r round(predict(mod)[16] - (qt(p = .975, df=14)*sqrt(mse(mod)) * sqrt((1/16)+((94-mean(q.three.dat$x))^2/(var(q.three.dat$x) * 15)))),4)`, `r round(predict(mod)[16] + (qt(p = .975, df=14)*sqrt(mse(mod)) * sqrt((1/16)+((94-mean(q.three.dat$x))^2/(var(q.three.dat$x) * 15)))),4)`]
+```{r q-3-g, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
 
-For safety, lets compare these estimates to the R predict function estimates:
-
-$C.I.M_{rPredict}$ = [`r predict(mod, interval="confidence")[12,2]`, `r predict(mod, interval="confidence")[12,3]`]
-
-It appears we have no consensus, although some diagreement at the tens decimal place...
+C.I.I = [`r cli.vals[1]`, `r cli.vals[2]`]
 
 ## h.
 Here we want to estimate the 95% confidence interval for the slope of the regression model.
 
 In order to perform this we are going to use the following formula:
 
-$\hat\beta{_1} \pm t_{\alpha/2;df=n-2}*se(\hat\beta_{1})$
+$\hat\beta{_1} \pm t_{df=14}*se(\hat\beta_{1})$
 
 With the standard error of $\hat\beta_1$ calculated as:
 
@@ -274,7 +277,7 @@ $\beta_{1} =$ 0.2616
 
 $t_{14}=$ `r qt(p = .975, df=14)`
 
-$MSE = $ `r mse(mod)`
+MSE = `r mse(mod)`
 
 $SS_x=$ `r var(q.three.dat$x) * 15`
 
@@ -288,6 +291,7 @@ As we observe from the preceding plots, these data appear to display homoscedast
 
 # Question 4
 Analysis of Variance
+
 Model DF: 1
 
 Model SS: 9.874148
