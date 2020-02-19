@@ -75,7 +75,7 @@ $H_a: r \neq 0$
 
 ${\alpha}=0.05$
 
-We would like to calculate the t value of the correlation. The t value's formula is: $t = \frac{r\sqrt(n-2)}{\sqrt{1-r^2}}$
+We would like to calculate the t value of the correlation. The t value's formula is: $t = \frac{r\sqrt{(n-2)}}{\sqrt{1-r^2}}$
 
 t = `r (-0.8925869 * sqrt(14)) / sqrt(1 - -0.8925869*-0.8925869)`
 
@@ -91,7 +91,7 @@ This confidence interval suggests that if this sampling procedure was repeated, 
 ## f. 
 The 95% C.I. for a participant with an age of 63 is equal to [`r 142.68 - 1.899*63`,`r 142.68 - 1.041*63`]. 
 
-This confidence interval suggests that if this sampling procedure was repeated, we would expect the predicted mean to fall between the range stated above in 95% samples. 
+This confidence interval suggests that if this sampling procedure was repeated, we would expect the predicted mean to fall between the range stated above in 95% samples that are redrawn. 
 
 ## g.
 The residual is equal to $Y - \hat{Y}$ = 45 - `r 142.68 - 1.47*60` = `r 45 - (142.68 - 1.47*60)`
@@ -126,12 +126,12 @@ Here the residual is 1.5, meaning the value was underpredicted by 1.5%.
 ## d.
 PRE = 0.7541 
 
-This PRE suggests that the additional variable yields a .7541 proportional reduction in error across this model and the null model. 
+This PRE suggests that the additional variable yields a .7541 proportional reduction in error when compared a model only utilizing the mean value. 
 
 ## e. 
 The 95% C.I. for ${\beta}_1$ = 0.95429 +/- `r round(qt(p = .975, df=4) * 0.27247, 4)`; [`r 0.95429-round(qt(p = .975, df=4) * 0.27247, 4)`,`r 0.95429+round(qt(p = .975, df=4) * 0.27247, 4)`]
 
-This confidence interval suggests that if this sampling procedure was repeated, we would expect the standard deviation of the slope estimate to be about `r round(qt(p = .975, df=4) * 0.27247, 4)`.
+This confidence interval suggests that if this sampling procedure was repeated, we would expect 95% of the slope estimates to fall within the previously reported interval.
 
 ## f.
 State our hypotheses:
@@ -150,7 +150,7 @@ Conditional variance is equivalent to $\frac{1}{n}\Sigma_{n=1}^{i}(y-\hat{y})^2$
 
 ## h. 
 
-This study had 6 observations, assuming all of the observations were unique, this study had 6 years worth of data.
+This study had 6 observations, assuming all of the observations were from unique years, this study had 6 years worth of data.
 
 ## i.
 
@@ -200,6 +200,7 @@ The estimated correlation value is: `r cor.val`
 ## c.
 ```{r q-3-c, echo=FALSE, results='show', message=FALSE, warning=FALSE}
 ```
+
 The fitted standardized regression model is:  $\hat{Y}_i = 0 + 0.365*X_i$
 
 ## d. 
@@ -211,7 +212,7 @@ The proportion reduction of error here is 0.1332, which suggests a small-medium 
 ## f.
 We want to calculate the confidence interval for the mean prediction. The associated formula is:
 
-$\hat{Y}{\pm}t_{14}*\sqrt{MSE}*\sqrt{\frac{1}{n}\frac{(X_i-\overline{X})^2}{SS_x}}$
+$\hat{Y}{\pm}t_{14}*\sqrt{MSE}*\sqrt{\frac{1}{n}+\frac{(X_i-\overline{X})^2}{SS_x}}$
 
 Values will be:
 
@@ -237,7 +238,7 @@ C.I.M = [`r clm.vals[1]`, `r clm.vals[2]`]
 ## g. 
 We want to calculate the confidence interval for an individual predicition. The associated formula is:
 
-$\hat{Y}{\pm}t_{14}*\sqrt{MSE}*\sqrt{1+\frac{1}{n}\frac{(X_i-\overline{X})^2}{SS_x}}$
+$\hat{Y}{\pm}t_{14}*\sqrt{MSE}*\sqrt{1+\frac{1}{n}+\frac{(X_i-\overline{X})^2}{SS_x}}$
 
 Values will be:
 
