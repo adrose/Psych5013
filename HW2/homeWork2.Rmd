@@ -1,0 +1,104 @@
+---
+title: "HW 2"
+author: "Adon Rosen"
+date: 'Date: `r Sys.Date()`'
+output: pdf_document
+---
+  
+```{r, echo=F, message=F, warning=FALSE}
+library(knitr)
+opts_knit$set(root.dir='~/Documents/Psych5013/HW2')  #Don't combine this call with any other chunk -especially one that uses file paths.
+```
+
+
+<!-- Set the report-wide options, and point to the external code file. -->
+```{r set_options, echo=F, warning=FALSE}
+# cat("Working directory: ", getwd())
+report_render_start_time <- Sys.time()
+opts_chunk$set(
+  results    = 'show',
+  comment    = NA,
+  tidy       = FALSE,
+  fig.width  = 10,
+  fig.height = 6,
+  fig.path   = 'figure-png/'
+)
+# echoChunks <- FALSE
+options(width=80) #So the output is 50% wider than the default.
+read_chunk("./homeWork2.R") #This allows knitr to call chunks tagged in the underlying *.R file.
+```
+
+```{r load-packages, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+
+# Chapter 10
+## 2)
+### a) 
+I am not sure we have been taught this yet???
+The question is asking if MJ casues GPA or if GPA casues MJ. The first direction is stating that the use of MJ will alter the GPA; whereas the second is stating the change in GPA will alter the MJ use.
+
+### b)
+A third variable can exist such as SES which will impact the relationship between MJ and GPA. This third varibale can either mediate the realtionship (explain the casual mechanism from MJ to GPA) or modertate (interact with the relationship between MJ and GPA) the realtionship between these variables.
+
+## 3)
+An example of an ambigious time ordered relationship is the chicken or the egg debate in evolution. 
+
+## 4)
+Controlling for a variable involves removing the 
+
+## 5)
+
+## 6)
+
+## 9)
+
+## 10)
+
+## 11)
+
+## 14)
+
+# Chapter 11
+## 1)
+### a)
+These data appear to display a strong positive relationship. As income increases so crime.
+
+### b)
+It now appears to have a negative relationship. As the residualized income increases crime deceases.
+
+### c)
+the regression equation is  $Y_{crime}=\beta_{0}+\beta_{income}\times X_i$ == $Y_i=-11.526 + 2.609 \times X_{i}$
+
+### d)
+the regression equation is  $Y_{crime}=\beta_{0}+\beta_{income}\times X_{j,i} + \beta_{urban} \times X_{j,i+1}$ == $Y_i=40.261 + -0.809 \times X_{i} + 0.649 * X_{i+1}$
+
+### e)
+Here we see the extent to how collinear the relationship between income and ubran environments are. Sepcifically the correlation between these tweo vairables is r = .73 which suggests that are very strongly correlated.
+
+### f)
+(i) == $Y = 40.261 + 0*0.646 + X*-0.809$
+
+(ii) == $Y = 40.261 + 50*0.646 + X*-0.809$
+
+(iii) == $Y = 40.261 + 100*0.646 + X*-0.809$
+
+## 2)
+### a)
+(i) $Y = .2 + .5*4.0 + .002*800$ = `r .2 + .5*4.0 + .002*800`
+
+(ii) $Y = .2 + .5*3.0 + .002*300$ = `r .2 + .5*3.0 + .002*300`
+
+### b)
+I really don't want to do this problem =(
+
+### e)
+No, because the units and ranges of these data are different the coefficients can not be compared until they are both standardized.
+
+## 9)
+
+## 11)
+
+## 14)
+
+## 17)
