@@ -7,7 +7,7 @@ output: pdf_document
   
 ```{r, echo=F, message=F, warning=FALSE}
 library(knitr)
-opts_knit$set(root.dir='~/Documents/Psych5013/HW2')  #Don't combine this call with any other chunk -especially one that uses file paths.
+opts_knit$set(root.dir='./')  #Don't combine this call with any other chunk -especially one that uses file paths.
 ```
 
 
@@ -96,6 +96,14 @@ I really don't want to do this problem =(
 No, because the units and ranges of these data are different the coefficients can not be compared until they are both standardized.
 
 ## 9)
+### a)
+$Y_{feelingsTowradsLiberals} = 135.31 - 14.07\times X_{ideology}  - 2.95 \times X_{religion}$
+
+### b) 
+${Y}=135.31 + $
+
+### e)
+Use the GLM formula;  F* = [pre  / (1 – pre)]  *   df(r) – df(f) / df(f).
 
 ## 11)
 
