@@ -1,0 +1,111 @@
+---
+title: "Quiz 2"
+author: "Adon Rosen"
+date: 'Date: `r Sys.Date()`'
+output: pdf_document
+---
+  
+```{r, echo=F, message=F, warning=FALSE}
+library(knitr)
+opts_knit$set(root.dir='./')  #Don't combine this call with any other chunk -especially one that uses file paths.
+```
+
+
+<!-- Set the report-wide options, and point to the external code file. -->
+```{r set_options, echo=F, warning=FALSE}
+# cat("Working directory: ", getwd())
+report_render_start_time <- Sys.time()
+opts_chunk$set(
+  results    = 'show',
+  comment    = NA,
+  tidy       = FALSE,
+  fig.width  = 10,
+  fig.height = 6,
+  fig.path   = 'figure-png/'
+)
+# echoChunks <- FALSE
+options(width=80) #So the output is 50% wider than the default.
+read_chunk("./Quiz2.R") #This allows knitr to call chunks tagged in the underlying *.R file.
+```
+
+
+```{r load-packages, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+```{r load-data, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+```{r declare-functions, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+
+
+# Question 1
+How fast can evolution occur in nature?  Are evolutionary trajectories unique or predictable?  In 1980, 
+a European Union (EU) fly (Drosophila subobscura) was accidentally introduced into North America.  
+In Europe, the fly’s wing size systematically varies with latitude, suggesting an evolutionary 
+adaptation.  After allowing two decades for the introduced North American flies to spread over the 
+continent, flies were captured and the hypothesis of speedy evolution was examined by comparing the 
+wing sizes at different latitudes between NA and EU flies.
+
+## a.
+Model Reduced: $Y_{WingSize}=\beta_{intercept}+\beta_{Continent}\times X_{j,1} + \beta_{sex}\times X_{j,2}$
+
+Model Full: $Y_{WingSize}=\beta_{intercept}+\beta_{Continent}\times X_{j,1} + \beta_{sex}\times X_{j,2} + \beta_{latitude}\times X_{j,3}$
+
+## b.
+```{r q-1-b, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+The number of degrees of freedom for the full model is: 38
+
+The number of degrees of freedom for the reduced model is: 39 
+
+
+## c. Suppose you were to see the following SAS code in your program editor window:
+
+   PROC REG;
+   MODEL Y = X1 X2 X3;
+   DEMO: Test X2=0, X3=0;
+
+### c1. 
+The hypothesis being tested 
+
+## d.
+The estimated mean value for a female fly from North America captured at a latitude of 45 degrees can be written as: $\hat{Y}=\beta_{intercept} + \beta_{latitude}\times 45 +\beta_{continent}$
+
+
+# Question 2
+To evaluate the speedy adaptional hypothesis, we need to evaluate whether or not the rates of wing change as a function of latitude vary between EU and NA flies.  We may do this by including an interaction term X4 -  where X4 is the interaction between latitude and continent. In your favorite program, run a multiple regression model - with wing size as the DV -  that includes the linear effects of sex, continent, latitude, and the latitude by continent interaction.  
+
+
+## a. 
+```{r q-2-a, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+
+Given the model summary results prezented above, it appears that the effect which explains the most in wing size is fly sex. We can compare the relative effects of these covariates from their *t* values. THe covariate with the largest *t* value is sex.
+
+## b.
+```{r q-2-b, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+The value of the multiple correlation is: `r cor.val`
+
+## c.
+```{r q-2-c, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+The *F* value of the interaction effect is: `r f.value`
+
+The *p* value for the interaction term is: `r p.value`
+
+The squared partial correlation value is: `r squared.p.cor`
+
+## d.
+The model with the correct coefficients is: $\hat{Y}=820.9865+28.0224\times X_{i,Continent} + 2.1224 \times X_{i,Latitude} - 98.8571 \times X_{i,Sex} - 0.7217 \times X_{i,Continent*Latitude}$
+
+## e.
+```{r q-2-e, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+The RMSE for this model is: `r root.value`. The root MSE is equivalent to the conditional standard deviation. This also refers to the standard deviation of the residual values.
+
+## f.

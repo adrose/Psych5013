@@ -6,6 +6,7 @@ library("knitr")
 library("kableExtra")
 library("reshape2")
 library("sjstats")
+library("ppcor")
 setwd("./")
 
 # ---- load-data --------------------------------------------------------
@@ -17,18 +18,29 @@ data.in <- read.csv("./dataQuiz2.csv")
 # ---- q-1-b --------------------------------------------------------
 model.full <- lm(WingSize ~ continent + latitude + Sex, data=data.in)
 model.reduced <- lm(WingSize ~ continent + Sex, data=data.in)
-# ---- q-3-a --------------------------------------------------------
-mod <- lm(y ~ x, data=q.three.dat)
-#summary(mod)
 
-# ---- q-3-b --------------------------------------------------------
-cor.val <- cor(q.three.dat$x, q.three.dat$y)
 
-# ---- q-3-c --------------------------------------------------------
-q.three.dat$xStand <- scale(q.three.dat$x)
-q.three.dat$yStand <- scale(q.three.dat$y)
-mod.stand <- lm(yStand ~ xStand, data=q.three.dat)
-#summary(mod.stand)
+# ---- q-2-a --------------------------------------------------------
+model.int <- lm(WingSize ~ continent * latitude + Sex, data=data.in)
+model.int.sum <- summary(model.int)
+print(model.int.sum)
+
+# ---- q-2-b --------------------------------------------------------
+cor.val <- cor(model.int$fitted.values, data.in$WingSize)
+
+# ---- q-2-c --------------------------------------------------------
+# First get the f value
+f.value <- anova(model.int)['continent:latitude','F value']
+p.value <- anova(model.int)['continent:latitude','Pr(>F)']
+
+## Now calculate the partial cor value
+p.cor.data <- data.frame(model.matrix(model.int)[,-1])
+p.cor.data$Wingsize <- data.in$WingSize
+p.cor.vals <- pcor(x=p.cor.data)$estimate['Wingsize',"continentna.latitude"]
+squared.p.cor <- p.cor.vals*p.cor.vals
+
+# ---- q-2-e --------------------------------------------------------
+root.value <- rmse(model.int)
 
 # ---- q-3-f --------------------------------------------------------
 # First find the value closest to the mean
