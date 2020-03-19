@@ -47,7 +47,7 @@ continent, flies were captured and the hypothesis of speedy evolution was examin
 wing sizes at different latitudes between NA and EU flies.
 
 ## a.
-Model Reduced: $Y_{WingSize}=\beta_{intercept}+\beta_{Continent}\times X_{j,1} + \beta_{sex}\times X_{j,2}$
+Model Restricted: $Y_{WingSize}=\beta_{intercept}+\beta_{Continent}\times X_{j,1} + \beta_{sex}\times X_{j,2}$
 
 Model Full: $Y_{WingSize}=\beta_{intercept}+\beta_{Continent}\times X_{j,1} + \beta_{sex}\times X_{j,2} + \beta_{latitude}\times X_{j,3}$
 
@@ -56,17 +56,25 @@ Model Full: $Y_{WingSize}=\beta_{intercept}+\beta_{Continent}\times X_{j,1} + \b
 ```
 The number of degrees of freedom for the full model is: 38
 
-The number of degrees of freedom for the reduced model is: 39 
+The number of degrees of freedom for the restricted model is: 39 
 
 
 ## c. Suppose you were to see the following SAS code in your program editor window:
 
    PROC REG;
+   
    MODEL Y = X1 X2 X3;
+   
    DEMO: Test X2=0, X3=0;
 
 ### c1. 
-The hypothesis being tested 
+The hypothesis being tested is if the model including latitude, continent and sex explains more of the variance in wing size than a model only inclduing latitude.
+
+### c2. 
+
+model restricted: $Y_{WingSize}=\beta_{intercept}+\beta_{latitude} + X_{j,1}$
+
+model full: $Y_{WingSize}=\beta_{intercept}+\beta_{Continent}\times X_{j,1} + \beta_{sex}\times X_{j,2} + \beta_{latitude}\times X_{j,3}$
 
 ## d.
 The estimated mean value for a female fly from North America captured at a latitude of 45 degrees can be written as: $\hat{Y}=\beta_{intercept} + \beta_{latitude}\times 45 +\beta_{continent}$
@@ -81,13 +89,15 @@ To evaluate the speedy adaptional hypothesis, we need to evaluate whether or not
 ```
 
 
-Given the model summary results prezented above, it appears that the effect which explains the most in wing size is fly sex. We can compare the relative effects of these covariates from their *t* values. THe covariate with the largest *t* value is sex.
+Given the model summary results presented above, it appears that the effect which explains the most in wing size is fly sex. We can compare the relative effects of these covariates from their *t* values. The covariate with the largest *t* value is sex.
+
+Another option to compare variable important is to observe the Type III sum of squares. These are the partial sum of sqaures, so the relative influence the variable of interest has while contorlling for all of ther variables. Because this is performed in an Anova framework, the variable which explains the greatest variance will also have the largest *F* value, which in this case is also the fly sex variable, with an *F* stat of: `r tmp`
 
 ## b.
 ```{r q-2-b, echo=FALSE, results='show', message=FALSE, warning=FALSE}
 ```
 
-The value of the multiple correlation is: `r cor.val`
+The value of the multiple correlation is: `r cor.val`. This model has a poisitive relationship between the predicted values and the true values.
 
 ## c.
 ```{r q-2-c, echo=FALSE, results='show', message=FALSE, warning=FALSE}
@@ -109,3 +119,123 @@ The model with the correct coefficients is: $\hat{Y}=820.9865+28.0224\times X_{i
 The RMSE for this model is: `r root.value`. The root MSE is equivalent to the conditional standard deviation. This also refers to the standard deviation of the residual values.
 
 ## f.
+The observation with the greatest residual value has the following observed values:
+
+```{r q-2-f, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+The predicted and observed values are:
+
+```{r q-2-f2, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+
+
+## g.
+```{r q-2-g, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+The coefficient of the interaction term is: `r int.val`. This value indicates a modification for the slope between latitude and wing size for the observations from North America. Specifically when an observation is from the NA continent, this value will be multiplied with the latitude of the observation, this product will then be added to the products of the other main effects. The modification to slope suggests that observations from NA have a slightly lower relationship between wing size and latitude.
+
+## h.
+```{r q-2-h, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+
+The *t* value for the interaction term with standardized coefficients is: `r t.val.int`
+
+## i.
+```{r q-2-i, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+This question is asking for the comparison in model fit between a model with an interaction term and a model without one. 
+
+The change in residual sum of squares is: 158.34
+
+The corresponding *F* stat is: `r anova.val.f` . Given the reported *F* stat, we would conclude that the interaction term does not explain a significant amount of variance.
+
+## j.
+```{r q-2-j, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+Here I will return the predicted values for a female from North America captured at 45 degrees of latitude from all trained models:
+
+Model Reduced (Main Effects): $\hat{Y}_{WingSize}=\beta_{intercept}+\beta_{Continent}\times X_{j,1} + \beta_{sex}\times X_{j,2}$ = `r model.reduced.pred`
+
+Model Full (Main Effects): $\hat{Y}_{WingSize}=\beta_{intercept}+\beta_{Continent}\times X_{j,1} + \beta_{sex}\times X_{j,2} + \beta_{latitude}\times X_{j,3}$ = `r model.full.pred` 
+
+Model Full (Interaction): $\hat{Y}_{WingSize}=\beta_{intercept}+\beta_{Continent}\times X_{j,1} + \beta_{sex}\times X_{j,2} + \beta_{latitude}\times X_{j,3}+\beta_{Continent*Latitude}\times X_{j,4}$ = `r model.int.pred`  
+
+
+## k.
+
+Expected intercept: 
+
+# Question 3
+Consider a multiple regression in which we have 4 variables:  A response variable Y and 3 explanatory variables: x1, x2, and x3.
+
+Use proper notation for all parts of the question.  That is, use 
+
+r2y1.2 for (squared) partial correlations,
+
+r2y(1.2), for (squared) semi-partial correlations, and 
+
+r2y1 for (squared) simple correlations.
+
+R2y.12 for (squared) multiple correlations  
+
+
+## a. 
+$R^2_{Y.X2X3}=\frac{r^2_{YX2}+r^2_{YX3}-2r_{YX1}r_{YX3}r_{X2X3}}{1-r^2_{X2X3}}$
+
+## b.
+$r^2_{Y(X2.X1X3)}=$
+
+
+# Question 4
+```{r q-4, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+**Cor Table**
+
+Correlation x1.y: 0.2565
+
+**Analysis of Variance**
+
+Model DF: 2
+
+Model SS: `r (4.58 * ((1.03178^2 * 98) / 97)) * 2`
+
+Model Mean Square: `r 4.58 * ((1.03178^2 * 98) / 97)`
+
+Error SS: `r 1.03178^2 * 98`
+
+Error Mean Square: `r (1.03178^2 * 98) / 97`
+
+Corrected Total DF: 99
+
+Corrected Total SS: `r (1.03178^2 * 98) + ((4.58 * ((1.03178^2 * 98) / 97)) * 2)` 
+
+R-Square: `r coef.det`
+
+Adj R-Sq: `r ad.r.square`
+
+**Parameter Estimates**
+
+Intercept DF: 1
+
+Intercept *t* Value: `r 12.00578/0.10538`
+
+Intercept Standardized Estimate: 0
+
+X1 DF: 1
+
+X1 Standard Error: `r .22421 / 1.86`
+
+X1 Semi-partial Corr Type I: .1856445
+
+X2 DF: 1
+
+X2 Parameter Estimate: `r 1.48 * 0.12275`
+
+X2

@@ -7,10 +7,13 @@ library("kableExtra")
 library("reshape2")
 library("sjstats")
 library("ppcor")
+library("car")
 setwd("./")
 
 # ---- load-data --------------------------------------------------------
 data.in <- read.csv("./dataQuiz2.csv")
+data.in$latitudeScale <- scale(data.in$latitude)
+data.in$WingSizeScale <- scale(data.in$WingSize)
 
 # ---- declare-functions --------------------------------------------------------
 
@@ -22,8 +25,14 @@ model.reduced <- lm(WingSize ~ continent + Sex, data=data.in)
 
 # ---- q-2-a --------------------------------------------------------
 model.int <- lm(WingSize ~ continent * latitude + Sex, data=data.in)
+model.int.rev <- lm(WingSize*-1 ~ continent * latitude + Sex, data=data.in)
+model.int.scale <- lm(WingSizeScale ~ continent * latitudeScale + Sex, data=data.in)
 model.int.sum <- summary(model.int)
 print(model.int.sum)
+
+# Now calc the Type III SoS
+options(contrasts = c("contr.sum", "contr.poly"))
+tmp <- Anova(model.int, type='III')["Sex","F value"]
 
 # ---- q-2-b --------------------------------------------------------
 cor.val <- cor(model.int$fitted.values, data.in$WingSize)
@@ -42,20 +51,53 @@ squared.p.cor <- p.cor.vals*p.cor.vals
 # ---- q-2-e --------------------------------------------------------
 root.value <- rmse(model.int)
 
-# ---- q-3-f --------------------------------------------------------
-# First find the value closest to the mean
-index <- which(abs(q.three.dat$xStand)==min(abs(q.three.dat$xStand)))
-# Now I want to find the CLM -- the confidence interval of the predicted mean value
-clm.vals <- mean.pred.intervals(x = q.three.dat$x, y = q.three.dat$y, pred.x = 70)[1,1:2]
+# ---- q-2-f --------------------------------------------------------
+# Here I need to find the largest residual value and the corresponding observation
+max.resid.val <- which.max(abs(model.int$residuals))
 
+# Now add a column of predicted values to our data.in df
+data.in$PredictedValues <- predict(model.int)
 
-# ---- q-3-g --------------------------------------------------------
-# First find the value closest to the mean
-index.2 <- which(q.three.dat$xStand==max(q.three.dat$xStand))
-# Now I want to find the CLI -- the confidence interval for the predicted value
-cli.vals <- mean.pred.intervals(x = q.three.dat$x, y = q.three.dat$y, pred.x = 94)[2,1:2]
+# Now find the row elements
+vals.out <- kable(data.in[max.resid.val,])
+vals.out
 
-# ---- q-3-i --------------------------------------------------------
-plot(q.three.dat$x, q.three.dat$y, xlab = "Population Density", ylab="Robbery Rate")
+# ---- q-2-f2 --------------------------------------------------------
+# Here I need to find the largest residual value and the corresponding observation
+max.resid.val <- which.max(abs(model.int$residuals))
 
-plot(mod)
+# Now add a column of predicted values to our data.in df
+data.in$PredictedValues <- predict(model.int)
+
+# Now find the row elements
+vals.out <- kable(data.in[max.resid.val,c("WingSize","PredictedValues")])
+vals.out
+
+# ---- q-2-g --------------------------------------------------------
+# Here I am going to interpret the value of the interaction term
+# So I just need to grab the interaction term value right here
+int.val <- summary(model.int)$coefficients["continentna:latitude","Estimate"]
+
+# ---- q-2-h --------------------------------------------------------
+t.val.int <- summary(model.int.scale)$coefficients["continentna:latitudeScale","t value"]
+
+# ---- q-2-i --------------------------------------------------------
+anova.val <- anova(model.full, model.int)
+anova.val.f <- anova.val$F[2]
+
+# ---- q-2-j --------------------------------------------------------
+data.in[43,] <- c("na",45,0,"Female",0,0,0)
+data.in$latitude <- as.numeric(data.in$latitude)
+# Now predict from all of these models... because Terry does not make it clear which model to use
+model.reduced.pred <-predict(model.reduced, newdata = data.in[43,])
+model.full.pred <- predict(model.full, newdata = data.in[43,])
+model.int.pred <- predict(model.int, newdata = data.in[43,])
+
+# ---- q-4 --------------------------------------------------------
+library(matlib)
+for.r.sqraed <- matrix(c(1,.389,.2565,.3890,1,.2317,.2565,.2317,1), nrow = 3, ncol = 3)
+corY <- for.r.sqraed[1:2,3]
+rInv <- inv(for.r.sqraed[1:2,1:2])
+coef.det <- t(corY) %*% rInv %*% corY
+
+ad.r.square <- 1 - ((1-coef.det)*(99)/97)
