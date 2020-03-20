@@ -168,8 +168,37 @@ Model Full (Interaction): $\hat{Y}_{WingSize}=\beta_{intercept}+\beta_{Continent
 
 
 ## k.
+```{r q-2-k, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
 
-Expected intercept: 
+Expected intercept: `r b.1.int`
+
+Expected slope: `r b.1.slope`
+
+## l.
+```{r q-2-l, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+Expected intercept: `r b.1.int`
+
+Expected slope: `r b.1.slope`
+
+## m.
+```{r q-2-m, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+Expected intercept: `r b.1.int`
+
+Expected slope: `r b.1.slope`
+
+## n.
+```{r q-2-n, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+Expected intercept: `r b.1.int`
+
+Expected slope: `r b.1.slope`
+
 
 # Question 3
 Consider a multiple regression in which we have 4 variables:  A response variable Y and 3 explanatory variables: x1, x2, and x3.
@@ -232,10 +261,12 @@ X1 DF: 1
 
 X1 Standard Error: `r .22421 / 1.86`
 
-X1 Semi-partial Corr Type I: .1856445
+X1 Semi-partial Corr Type I: `r spcor.x1.x2`
 
 X2 DF: 1
 
 X2 Parameter Estimate: `r 1.48 * 0.12275`
 
-X2
+X2 Semi-partial Corr Type I: `r spcor.x2.x1`
+
+X2 Squared Partial Corr Type II: `r p.cor.val`

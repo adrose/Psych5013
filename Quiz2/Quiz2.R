@@ -7,6 +7,7 @@ library("kableExtra")
 library("reshape2")
 library("sjstats")
 library("ppcor")
+library("corpcor")
 library("car")
 setwd("./")
 
@@ -93,11 +94,67 @@ model.reduced.pred <-predict(model.reduced, newdata = data.in[43,])
 model.full.pred <- predict(model.full, newdata = data.in[43,])
 model.int.pred <- predict(model.int, newdata = data.in[43,])
 
+# ---- q-2-k --------------------------------------------------------
+data.in[43,] <- c("na",0,0,"Female",0,0,0)
+data.in$latitude <- as.numeric(data.in$latitude)
+b.1.int <- predict(model.int, newdata = data.in[43,])
+data.in[43,] <- c("na",100,0,"Female",0,0,0)
+data.in$latitude <- as.numeric(data.in$latitude)
+b.1.p2 <- predict(model.int, newdata = data.in[43,])
+b.1.slope <- (b.1.p2 - b.1.int) / 100
+
+# ---- q-2-l --------------------------------------------------------
+data.in[43,] <- c("eu",0,0,"Female",0,0,0)
+data.in$latitude <- as.numeric(data.in$latitude)
+b.1.int <- predict(model.int, newdata = data.in[43,])
+data.in[43,] <- c("eu",100,0,"Female",0,0,0)
+data.in$latitude <- as.numeric(data.in$latitude)
+b.1.p2 <- predict(model.int, newdata = data.in[43,])
+b.1.slope <- (b.1.p2 - b.1.int) / 100
+
+# ---- q-2-m --------------------------------------------------------
+data.in[43,] <- c("na",0,0,"Male",0,0,0)
+data.in$latitude <- as.numeric(data.in$latitude)
+b.1.int <- predict(model.int, newdata = data.in[43,])
+data.in[43,] <- c("na",100,0,"Male",0,0,0)
+data.in$latitude <- as.numeric(data.in$latitude)
+b.1.p2 <- predict(model.int, newdata = data.in[43,])
+b.1.slope <- (b.1.p2 - b.1.int) / 100
+
+# ---- q-2-n --------------------------------------------------------
+data.in[43,] <- c("eu",0,0,"Male",0,0,0)
+data.in$latitude <- as.numeric(data.in$latitude)
+b.1.int <- predict(model.int, newdata = data.in[43,])
+data.in[43,] <- c("eu",100,0,"Male",0,0,0)
+data.in$latitude <- as.numeric(data.in$latitude)
+b.1.p2 <- predict(model.int, newdata = data.in[43,])
+b.1.slope <- (b.1.p2 - b.1.int) / 100
+
 # ---- q-4 --------------------------------------------------------
 library(matlib)
 for.r.sqraed <- matrix(c(1,.389,.2565,.3890,1,.2317,.2565,.2317,1), nrow = 3, ncol = 3)
 corY <- for.r.sqraed[1:2,3]
 rInv <- inv(for.r.sqraed[1:2,1:2])
 coef.det <- t(corY) %*% rInv %*% corY
-
 ad.r.square <- 1 - ((1-coef.det)*(99)/97)
+
+
+## Now do the semi partial cors down here
+# here is the cor matrix
+row.1 <- c(1,.389,.2565)
+row.2 <- c(.389, 1, .2317)
+row.3 <- c(.2565,.2317,1)
+cor.mat <- rbind(row.1, row.2, row.3)
+# Here is the semi partial cor formula for two variables
+# (corrs[2,3]-corrs[2,1]*corrs[3,1])/(sqrt(1-corrs[2,1]^2))
+# Here column 3 is the DV, column 2 is the var of int, and column 1 is the var to partial out of the IV
+##         SATV  HSGPA   FGPA
+## SATV  1.0000 0.8745 0.8144
+## HSGPA 0.8745 1.0000 0.9226
+## FGPA  0.8144 0.9226 1.0000
+spcor.x2.x1 <- cor.mat[2,3]-cor.mat[2,1]*cor.mat[3,1]/(sqrt(1-cor.mat[2,1]^2)) 
+spcor.x1.x2 <- cor.mat[1,3]-cor.mat[2,1]*cor.mat[3,2]/(sqrt(1-cor.mat[1,3]^2)) 
+
+
+# Now grab our p cors from the cor matrix
+p.cor.val <- cor2pcor(cor.mat)[2,3]^2
