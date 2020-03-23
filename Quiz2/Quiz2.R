@@ -152,8 +152,8 @@ cor.mat <- rbind(row.1, row.2, row.3)
 ## SATV  1.0000 0.8745 0.8144
 ## HSGPA 0.8745 1.0000 0.9226
 ## FGPA  0.8144 0.9226 1.0000
-spcor.x2.x1 <- cor.mat[2,3]-cor.mat[2,1]*cor.mat[3,1]/(sqrt(1-cor.mat[2,1]^2)) 
-spcor.x1.x2 <- cor.mat[1,3]-cor.mat[2,1]*cor.mat[3,2]/(sqrt(1-cor.mat[1,3]^2)) 
+spcor.x2.x1 <- (cor.mat[2,3]-cor.mat[2,1]*cor.mat[3,1])/(sqrt(1-cor.mat[2,1]^2)) 
+spcor.x1.x2 <- (cor.mat[1,3]-cor.mat[2,1]*cor.mat[3,2])/(sqrt(1-cor.mat[1,3]^2)) 
 
 
 # Now grab our p cors from the cor matrix
