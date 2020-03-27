@@ -215,13 +215,14 @@ R2y.12 for (squared) multiple correlations
 
 
 ## a. 
-$R^2_{Y.X2X3}=\frac{r^2_{YX2}+r^2_{YX3}-2r_{YX1}r_{YX3}r_{X2X3}}{1-r^2_{X2X3}}$
-
-$R^2_{Y.X2X3}=R^2_{y.12}+R^2_{y.21}+$
+$R^2_{Y.X2X3}=r^2_{yx2} + R^2_{y(x3.x2)}$
 
 
 ## b.
-$r^2_{Y(X2.X1X3)}=$
+$r^2_{Y(X2.X1X3)}=\frac{r^2_{y.x2x1x3}}{1 - r^2_{YX2}}$
+
+## c.
+$f(r^2_{yx3.x1x2})=$
 
 
 # Question 4
