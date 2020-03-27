@@ -58,6 +58,7 @@ max.resid.val <- which.max(abs(model.int$residuals))
 
 # Now add a column of predicted values to our data.in df
 data.in$PredictedValues <- predict(model.int)
+data.in$Residuals <- residuals(model.int)
 
 # Now find the row elements
 vals.out <- kable(data.in[max.resid.val,])
@@ -71,7 +72,7 @@ max.resid.val <- which.max(abs(model.int$residuals))
 data.in$PredictedValues <- predict(model.int)
 
 # Now find the row elements
-vals.out <- kable(data.in[max.resid.val,c("WingSize","PredictedValues")])
+vals.out <- kable(data.in[max.resid.val,c("WingSize","PredictedValues", "Residuals")])
 vals.out
 
 # ---- q-2-g --------------------------------------------------------
@@ -87,7 +88,7 @@ anova.val <- anova(model.full, model.int)
 anova.val.f <- anova.val$F[2]
 
 # ---- q-2-j --------------------------------------------------------
-data.in[43,] <- c("na",45,0,"Female",0,0,0)
+data.in[43,] <- c("na",45,0,"Female",0,0,0,0)
 data.in$latitude <- as.numeric(data.in$latitude)
 # Now predict from all of these models... because Terry does not make it clear which model to use
 model.reduced.pred <-predict(model.reduced, newdata = data.in[43,])
@@ -95,37 +96,37 @@ model.full.pred <- predict(model.full, newdata = data.in[43,])
 model.int.pred <- predict(model.int, newdata = data.in[43,])
 
 # ---- q-2-k --------------------------------------------------------
-data.in[43,] <- c("na",0,0,"Female",0,0,0)
+data.in[43,] <- c("na",0,0,"Female",0,0,0,0)
 data.in$latitude <- as.numeric(data.in$latitude)
 b.1.int <- predict(model.int, newdata = data.in[43,])
-data.in[43,] <- c("na",100,0,"Female",0,0,0)
+data.in[43,] <- c("na",100,0,"Female",0,0,0,0)
 data.in$latitude <- as.numeric(data.in$latitude)
 b.1.p2 <- predict(model.int, newdata = data.in[43,])
 b.1.slope <- (b.1.p2 - b.1.int) / 100
 
 # ---- q-2-l --------------------------------------------------------
-data.in[43,] <- c("eu",0,0,"Female",0,0,0)
+data.in[43,] <- c("eu",0,0,"Female",0,0,0,0)
 data.in$latitude <- as.numeric(data.in$latitude)
 b.1.int <- predict(model.int, newdata = data.in[43,])
-data.in[43,] <- c("eu",100,0,"Female",0,0,0)
+data.in[43,] <- c("eu",100,0,"Female",0,0,0,0)
 data.in$latitude <- as.numeric(data.in$latitude)
 b.1.p2 <- predict(model.int, newdata = data.in[43,])
 b.1.slope <- (b.1.p2 - b.1.int) / 100
 
 # ---- q-2-m --------------------------------------------------------
-data.in[43,] <- c("na",0,0,"Male",0,0,0)
+data.in[43,] <- c("na",0,0,"Male",0,0,0,0)
 data.in$latitude <- as.numeric(data.in$latitude)
 b.1.int <- predict(model.int, newdata = data.in[43,])
-data.in[43,] <- c("na",100,0,"Male",0,0,0)
+data.in[43,] <- c("na",100,0,"Male",0,0,0,0)
 data.in$latitude <- as.numeric(data.in$latitude)
 b.1.p2 <- predict(model.int, newdata = data.in[43,])
 b.1.slope <- (b.1.p2 - b.1.int) / 100
 
 # ---- q-2-n --------------------------------------------------------
-data.in[43,] <- c("eu",0,0,"Male",0,0,0)
+data.in[43,] <- c("eu",0,0,"Male",0,0,0,0)
 data.in$latitude <- as.numeric(data.in$latitude)
 b.1.int <- predict(model.int, newdata = data.in[43,])
-data.in[43,] <- c("eu",100,0,"Male",0,0,0)
+data.in[43,] <- c("eu",100,0,"Male",0,0,0,0)
 data.in$latitude <- as.numeric(data.in$latitude)
 b.1.p2 <- predict(model.int, newdata = data.in[43,])
 b.1.slope <- (b.1.p2 - b.1.int) / 100
