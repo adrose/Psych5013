@@ -1,0 +1,88 @@
+---
+title: "Quiz 2"
+author: "Adon Rosen"
+date: 'Date: `r Sys.Date()`'
+output: pdf_document
+---
+  
+```{r, echo=F, message=F, warning=FALSE}
+library(knitr)
+opts_knit$set(root.dir='./')  #Don't combine this call with any other chunk -especially one that uses file paths.
+```
+
+
+<!-- Set the report-wide options, and point to the external code file. -->
+```{r set_options, echo=F, warning=FALSE}
+# cat("Working directory: ", getwd())
+report_render_start_time <- Sys.time()
+opts_chunk$set(
+  results    = 'show',
+  comment    = NA,
+  tidy       = FALSE,
+  fig.width  = 10,
+  fig.height = 6,
+  fig.path   = 'figure-png/'
+)
+# echoChunks <- FALSE
+options(width=80) #So the output is 50% wider than the default.
+read_chunk("./Quiz3.R") #This allows knitr to call chunks tagged in the underlying *.R file.
+```
+
+
+```{r load-packages, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+```{r load-data, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+```{r declare-functions, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+
+
+# Question 1
+ (29 points) The following data consists of a 3 (age) x 2 (sex) natural design in which the proportion 
+of pretend play between parents and infants changes as a function of age.  The DV (Y) is the observed 
+proportion of parent-infant play that consists of pretend play.  The first independent variable (X1) is age, 
+where 1 = 7-month old infants; 2 = 10-month old infants; and 3 = 13-month-old infants.   The second 
+independent variable (X2) is sex, where 1=girls and 2=boys.   There are 8 infants in each cell of the 
+design.  
+
+## a.
+```{r q-1-a, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+## b.
+The unbiased RMSE is: `r summary(model.out)$sigma`
+
+The biased RMSE is: `r rmse(model.out)`
+
+## c. 
+```{r q-1-c, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+The F value is: `r f.val.age`
+
+The p value is: `r p.val.age`
+
+The models being comapred are:
+
+model full: $Y_{playtime}= $
+
+model restricted:
+
+## d. 
+```{r q-1-d, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+The F value is: `r f.val.sex`
+
+The p value is: `r p.val.sex`
+
+## e.
+The models being comapred are
+
+model full: $Y_{playtime}= \beta_{0} + \beta_{sex}\times X_{i,1}+\beta_{age}\times X_{i,2} + \beta_{sex\times age}\times X_{i,3} + \epsilon_i$
+model restricted: $Y_{playtime}= \beta_{0} + \beta_{sex}\times X_{i,1}+\beta_{age}\times X_{i,2} + \epsilon_i$
+
+## f.
+While it is often inappropriate to drive model selection via significance in predictors (for instance, sex may be proven to be a signficiant predictor in the literature), the data suggest here that the most parasimounious model may be: $Y_{playtime}= \beta_{0} + \beta_{age}\times X_{i,2} +  \epsilon_i$
+
+## g.
