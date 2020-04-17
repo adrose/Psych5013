@@ -62,7 +62,7 @@ The F value is: `r f.val.age`
 
 The p value is: `r p.val.age`
 
-The models being comapred are:
+The models being compared are:
 
 model full: $Y_{playtime}= \beta_{intercept} + \beta_{age} \times X_{i,age} + \epsilon_i$
 
@@ -77,7 +77,7 @@ The F value is: `r f.val.sex`
 The p value is: `r p.val.sex`
 
 ## e.
-The models being comapred are
+The models being compared are
 
 model full: $Y_{playtime}= \beta_{0} + \beta_{sex}\times X_{i,1}+\beta_{age}\times X_{i,2} + \beta_{sex\times age}\times X_{i,3} + \epsilon_i$
 model restricted: $Y_{playtime}= \beta_{0} + \beta_{sex}\times X_{i,1}+\beta_{age}\times X_{i,2} + \epsilon_i$
@@ -86,25 +86,24 @@ model restricted: $Y_{playtime}= \beta_{0} + \beta_{sex}\times X_{i,1}+\beta_{ag
 While it is often inappropriate to drive model selection via significance in predictors (for instance, sex may be proven to be a signficiant predictor in the literature), the data suggest here that the most parasimounious model may be: $Y_{playtime}= \beta_{0} + \beta_{age}\times X_{i,2} +  \epsilon_i$, which is the model I would suggest given the data.
 
 ## g.
-### a.
-Results from linear model with linear effect:
+### Results from linear model with linear effect:
+
 ```{r q-1-g-lin, echo=FALSE, results='show', message=FALSE, warning=FALSE}
 ```
 
-Results from linear model with quadratic age effect:
+### Results from linear model with quadratic age effect:
 ```{r q-1-g-quad, echo=FALSE, results='show', message=FALSE, warning=FALSE}
 ```
 
-### b.
-Results from ANOVA model with linear contrasts:
+### Results from ANOVA model with linear contrasts:
 ```{r q-1-g-linan, echo=FALSE, results='show', message=FALSE, warning=FALSE}
 ```
 
-Results from ANOVA model with quadratic contrasts:
+#### Results from ANOVA model with quadratic contrasts:
 ```{r q-1-g-quadan, echo=FALSE, results='show', message=FALSE, warning=FALSE}
 ```
 
-Overall the linear model and the ANOVA models provide identical results: THe linear effect explains a significant portion of the varinace in the outcome; whereas, the quadratic effect does not. However, the linear model provides coefficients which can be used to interpret the magnitude of the effect. Specifically, for every increase in age unit playtime increases by .08 units.
+Overall the linear model and the ANOVA models provide identical results: The linear effect explains a significant portion of the variance in the outcome; whereas, the quadratic effect does not. However, the linear model provides coefficients which can be used to interpret the magnitude of the effect. Specifically, for every increase in age unit playtime increases by .08 units.
 
 ## h.
 ```{r q-1-h, echo=FALSE, results='show', message=FALSE, warning=FALSE}
@@ -122,25 +121,25 @@ for ANOVA researchers for many years.  Please answer the following questions con
 way non-orthogonal ANOVA. 
 
 ## a. 
-The word orthogonal refers to a geometric phenonmenom wherein the dot product of two vectors equals 0. THis occurs in a field of real numbers when these two vectors intersect with an angle of  $90^{\circ}$. This logic is applied to the deisgn matrix in balanced ANOVA models. Orthogonality exists in balanced ANOVA designs when:
+The word orthogonal refers to a geometric phenomenon wherein the dot product of two vectors equals 0, or if $c_{i}^Tc_j=0$ where c refers to a set of vectors and $i\neg=j$.This occurs in a field of real numbers when these two vectors intersect with an angle of  $90^{\circ}$. This logic is applied to the design matrix in balanced ANOVA models. Orthogonality exists in balanced ANOVA designs when:
 
 1) The sum of the coefficients in each linear contrast sums to 0
 
 2) The sum of the products of the corresponding coefficients in any two contrast equals zero
 
-However, when these are not satisfied, a deisgn is said to be unbalanced or non-orthogonal. So the term non-orthogonal when used in context to ANOVA modeling, refers to the phenomenom when a deisgn matrix does not have independece amongst it's cells in the design matrix.
+However, when these are not satisfied, a design is said to be unbalanced or non-orthogonal. So the term non-orthogonal when used in context to ANOVA modeling, refers to the phenomenon when a design matrix does not have independece amongst it's cells in the design matrix.
 
 ## b.
-Designs are nonorthognal when:
+Designs are non-orthognal when:
 
 1) The sum of the coefficients in each linear contrast does not sums to 0
 
 2) The sum of the products of the corresponding coefficients in any two contrast does not equals zero
 
-One contributing factor is when data are unbalanced, so cells will have unequal representation from various popoulations being tested. 
+One contributing factor is when data are unbalanced, so cells will have unequal representation from various populations being tested or are missing entire contrasts. 
 
 ## c.
-Balanced ANOVA models display independence across the comparisons being made. So all froms of decomposing the models (i.e. Types I, II, & III sum of squares) provide identical solutions. For instance type I sum of squares is an ordered decomposition of the sum of squares, so models are tested in a consequtive fashion, but when the two main effects being tested display a large correlation across themselves, the variable fed into the model first will be given a larger weight to the model.
+Balanced ANOVA models display independence across the comparisons being made. So all forms of decomposing the models (i.e. Types I, II, & III sum of squares) provide identical solutions. For instance type I sum of squares is an ordered decomposition of the sum of squares, so models are tested in a consecutive fashion, but when the two main effects being tested display a large correlation across themselves, the variable fed into the model first will be given a larger weight to the model.
 
 ## d.
 The Type I effects are the order dependent or the sequential sum-of-squres. Assuming the main effect of A was introduced into the model first, the order of tests would follow:
@@ -161,7 +160,7 @@ BE B:
 R(B|A) = R(A) - R(A,B)
 
 ## f.
-Type III tests assess the amount of variance a predictor adds when partialing out all additional covariates. So the main effects of A and B would be tested as follows:
+Type III tests assess the amount of variance a predictor adds when partialling out all additional covariates. So the main effects of A and B would be tested as follows:
 
 ME A:
 R(A|B) = R(B) - R(A,B)
@@ -171,27 +170,63 @@ R(B|A) = R(A) - R(A,B)
 
 ## g.
 
-IDK - were we taught this??
+Applebaum and Cramer (1972) suggest to use assess Type II effects when no moderation is present. This recommendation stems from the difficulty of interpreting two main effects when in the presence of an interaction.
 
 ## h.
 
-IDK were we even taught this???!!!
+Applebaum and Cramer (1972) highlight that when assessing Type I effects it is important to test for independence amongst the predictors. THis is important because if the predictors are confounded, only one predictor will be significant, wherein both are conveying similar information.
 
 ## i.
 
-FUCKING WHAT?! what probl;em even are you referring to?
+Anova and linear models are in essence identical modeling techniques. However they differ in that ANOVA models typically do not include intercept effects; whereas, linear models include an intercept and reference group coding.
 
-Linear models can be run without balanced cells. So the equivalent problem in a regression framework is simply linear regression.
+# Question 3 
 
-# 3. Consider the following  2-way ANOVA Table with the group number listed in the cells of the table.
+Consider the following  2-way ANOVA Table with the group number listed in the cells of the table.
 $\begin{matrix} Factor & B=1 & B=2 & B=3 & B=4 \\ A=1 & Group = 1 & Group = 2 & Group =3 & Group = 4 \\ A = 2 & Group = 5 & Group = 6 & Group = 7 & Group = 8  \end{matrix}$
 
 ## a.
+#### With intercept model:
 ```{r q-3-a, echo=FALSE, results='show', message=FALSE, warning=FALSE}
 ```
 
+#### Cell mean model:
+```{r q-3-a-2, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
 
 ## b. 
-```{r q-3-b, echo=FALSE, results='show', message=FALSE, warning=FALSE}
-```
 proc glm data = data; 
+
+  class a b;
+  
+  model y = a b a*b; 
+  
+run;
+
+## c.
+proc glm data = data; 
+
+  class a b;
+  
+  model y = a b a*b;
+  
+  contrast "ME A" a 1 -1;
+  
+  contrast "ME B" b 1 0 0 -1,
+  
+  0 1 0 -1,
+  
+  0 0 1 -1;
+  
+run;
+
+## d.
+proc glm data = data; 
+
+  class a b;
+  
+  model y = a b a*b;
+  
+  contrast "linear B ME" b -1 -.5 .5 1;
+  
+run;

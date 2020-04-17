@@ -70,4 +70,11 @@ y <- runif(8)
 factor.a <- factor(c(1,1,1,1,2,2,2,2), levels=c(2,1))
 factor.b <- factor(c(1,2,3,4,1,2,3,4), levels=c(4,3,2,1))
 data.out <- data.frame(y=y, factorA=factor.a, factorB=factor.b)
-kable(model.matrix(y ~ factorA + factorB, data=data.out))
+kable(model.matrix(y ~ factorA * factorB, data=data.out))
+
+# ---- q-3-a-2 --------------------------------------------------------
+y <- runif(8)
+factor.a <- factor(c(1,1,1,1,2,2,2,2), levels=c(2,1))
+factor.b <- factor(c(1,2,3,4,1,2,3,4), levels=c(4,3,2,1))
+data.out <- data.frame(y=y, factorA=factor.a, factorB=factor.b)
+kable(model.matrix(y ~ factorA * factorB +-1, data=data.out))
