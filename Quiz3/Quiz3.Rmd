@@ -1,5 +1,5 @@
 ---
-title: "Quiz 2"
+title: "Quiz 3"
 author: "Adon Rosen"
 date: 'Date: `r Sys.Date()`'
 output: pdf_document
@@ -79,11 +79,12 @@ The p value is: `r p.val.sex`
 ## e.
 The models being compared are
 
-model full: $Y_{playtime}= \beta_{0} + \beta_{sex}\times X_{i,1}+\beta_{age}\times X_{i,2} + \beta_{sex\times age}\times X_{i,3} + \epsilon_i$
-model restricted: $Y_{playtime}= \beta_{0} + \beta_{sex}\times X_{i,1}+\beta_{age}\times X_{i,2} + \epsilon_i$
+model full: $Y_{playtime}= \beta_{0} + \beta_{sex}\times X_{i,sex}+\beta_{age}\times X_{i,age} + \beta_{sex\times age}\times X_{i,age*sex} + \epsilon_i$
+
+model restricted: $Y_{playtime}= \beta_{0} + \beta_{sex}\times X_{i,sex}+\beta_{age}\times X_{i,age} + \epsilon_i$
 
 ## f.
-While it is often inappropriate to drive model selection via significance in predictors (for instance, sex may be proven to be a signficiant predictor in the literature), the data suggest here that the most parasimounious model may be: $Y_{playtime}= \beta_{0} + \beta_{age}\times X_{i,2} +  \epsilon_i$, which is the model I would suggest given the data.
+While it is often inappropriate to drive model selection via significance in predictors (for instance, sex may be proven to be a signficiant predictor in the literature), the data suggest here that the most parasimounious model may be: $Y_{playtime}= \beta_{0} + \beta_{age}\times X_{i,age} +  \epsilon_i$, which is the model I would suggest given the data.
 
 ## g.
 ### Results from linear model with linear effect:
@@ -145,7 +146,7 @@ Balanced ANOVA models display independence across the comparisons being made. So
 The Type I effects are the order dependent or the sequential sum-of-squres. Assuming the main effect of A was introduced into the model first, the order of tests would follow:
 
 ME A:
-R(A) = R() - A(A)
+R(A) = R() - R(A)
 
 ME B:
 R(B|A) = R(A) - R(B|A)
