@@ -77,6 +77,13 @@ The F value is: `r f.val.sex`
 The p value is: `r p.val.sex`
 
 ## e.
+```{r q-1-e, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+The F value is: `r f.val.int`
+
+the p value is: `r p.val.int`
+
 The models being compared are
 
 model full: $Y_{playtime}= \beta_{0} + \beta_{sex}\times X_{i,sex}+\beta_{age}\times X_{i,age} + \beta_{sex\times age}\times X_{i,age*sex} + \epsilon_i$
@@ -143,7 +150,7 @@ One contributing factor is when data are unbalanced, so cells will have unequal 
 Balanced ANOVA models display independence across the comparisons being made. So all forms of decomposing the models (i.e. Types I, II, & III sum of squares) provide identical solutions. For instance type I sum of squares is an ordered decomposition of the sum of squares, so models are tested in a consecutive fashion, but when the two main effects being tested display a large correlation across themselves, the variable fed into the model first will be given a larger weight to the model.
 
 ## d.
-The Type I effects are the order dependent or the sequential sum-of-squres. Assuming the main effect of A was introduced into the model first, the order of tests would follow:
+The Type I effects are the order dependent or the sequential sum-of-squres. Assuming the main effect of A was introduced into the model first, the order of tests would follow (all models include intercepts):
 
 ME A:
 R(A) = R() - R(A)
@@ -152,21 +159,22 @@ ME B:
 R(B|A) = R(A) - R(B|A)
 
 ## e.
-Type II tests assess the amount of variance a term adds when all terms are included except terms that contain the effect being tested. So the main effects of A and B would be tested as follows:
+Type II tests assess the amount of variance a term adds when all terms are included except terms that contain the effect being tested. So the main effects of A and B would be tested as follows (all models include intercepts):
 
 ME A:
 R(A|B) = R(B) - R(A,B)
 
-BE B:
+ME B:
 R(B|A) = R(A) - R(A,B)
 
 ## f.
+
 Type III tests assess the amount of variance a predictor adds when partialling out all additional covariates. So the main effects of A and B would be tested as follows:
 
 ME A:
 R(A|B) = R(B) - R(A,B)
 
-BE B:
+ME B:
 R(B|A) = R(A) - R(A,B)
 
 ## g.
@@ -179,7 +187,7 @@ Applebaum and Cramer (1972) highlight that when assessing Type I effects it is i
 
 ## i.
 
-Anova and linear models are in essence identical modeling techniques. However they differ in that ANOVA models typically do not include intercept effects; whereas, linear models include an intercept and reference group coding.
+Anova and linear models are in essence identical modeling techniques. However they differ in that ANOVA models typically do not include intercept effects whereas linear models include an intercept and reference group coding.
 
 # Question 3 
 
@@ -228,6 +236,6 @@ proc glm data = data;
   
   model y = a b a*b;
   
-  contrast "linear B ME" b -1 -.5 .5 1;
+  contrast "linear B ME" b -$\pi$ $-e$ $e$ $\pi$;
   
 run;

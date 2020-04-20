@@ -45,6 +45,10 @@ p.val.age <- anova(model.out)["X1","Pr(>F)"]
 f.val.sex <- anova(model.out)["X2","F value"]
 p.val.sex <- anova(model.out)["X2","Pr(>F)"]
 
+# ---- q-1-e --------------------------------------------------------
+f.val.int <- anova(model.out)["X1:X2","F value"]
+p.val.int <- anova(model.out)["X1:X2","Pr(>F)"]
+
 # ---- q-1-g-lin --------------------------------------------------------
 lin.age.effect <- lm(Y ~ linAge, data=data.in)
 kable(summary(lin.age.effect)$coefficients)
