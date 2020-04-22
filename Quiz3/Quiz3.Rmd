@@ -51,7 +51,7 @@ design.
 ```
 
 ## b.
-The unbiased RMSE is: `r summary(model.out)$sigma`
+**The unbiased RMSE is: `r summary(model.out)$sigma`**
 
 The biased RMSE is: `r rmse(model.out)`
 
@@ -172,10 +172,10 @@ R(B|A) = R(A) - R(A,B)
 Type III tests assess the amount of variance a predictor adds when partialling out all additional covariates. So the main effects of A and B would be tested as follows:
 
 ME A:
-R(A|B) = R(B) - R(A,B)
+R(A|B) = R(B,B$\times$A) - R(A,B,A$\times$B)
 
 ME B:
-R(B|A) = R(A) - R(A,B)
+R(B|A) = R(A, A$\times$B) - R(A,B,A$\times$B)
 
 ## g.
 
