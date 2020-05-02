@@ -45,7 +45,7 @@ The numerator degrees of freedom is: 19
 
 The denonminator degrees of freedom is: 3
 
-KJHFIUEHWEKJENHFIOU$HF(&$RY)
+KJHFIUEHWEKJENHFIOUHF(RY)
 
 ## b. 
 
@@ -98,3 +98,55 @@ Model F value: `r qf(0.998, df1=3, df2=18)`
 Error DF: 18
 
 Error Sum of Squares: `r 489.8181818 - (9.1226852 * qf(0.998, df1=3, df2=18))`
+
+Corrected Total DF: 21
+
+Root MSE: `r sqrt(9.1226852 * qf(0.998, df1=3, df2=18))`
+
+### Type 1 Anova Table
+
+Prof DF: 1
+
+Prof Type I SS: `r 27.65 * 9.1226852`
+
+Prof Mean Square: `r 27.65 * 9.1226852`
+
+Sex DF: 1
+
+Sex Type I SS: `r 7.98 * 9.1226852`
+
+Sex Mean Square: `r 7.98 * 9.1226852`
+
+PROF$*$SEX DF: 1
+
+PROF$*$SEX Type I SS: `r qf(.2049, df1=3, df2=18) * 9.1226852`
+
+PROF$*$SEX Mean Square: `r qf(.2049, df1=3, df2=18) * 9.1226852`
+
+PROF$*$SEX F Value: `r qf(.2049, df1=3, df2=18)`
+
+### Type II Anova Table
+
+PROF DF: 1
+
+SEX DF: 1
+
+PROF$*$SEX DF: 1
+
+PROF$*$SEX Type II SS: 0.6337719
+
+PROF$*$SEX F Value: `r qf(.2049, df1=3, df2=18)`
+
+### Type III Anova Table
+
+PROF DF: 1
+
+SEX DF: 1
+
+PROF$*$SEX DF: 1
+
+PROF$*$SEX Type III SS: `r qf(.2049, df1=3, df2=18) * 9.1226852`
+
+PROF$*$SEX Mean Square: `r qf(.2049, df1=3, df2=18) * 9.1226852`
+
+PROF$*$SEX F Value: `r qf(.2049, df1=3, df2=18)`
