@@ -1,0 +1,100 @@
+---
+title: "Final"
+author: "Adon Rosen"
+date: 'Date: `r Sys.Date()`'
+output: pdf_document
+---
+  
+```{r, echo=F, message=F, warning=FALSE}
+library(knitr)
+opts_knit$set(root.dir='./')  #Don't combine this call with any other chunk -especially one that uses file paths.
+```
+
+
+<!-- Set the report-wide options, and point to the external code file. -->
+```{r set_options, echo=F, warning=FALSE}
+# cat("Working directory: ", getwd())
+report_render_start_time <- Sys.time()
+opts_chunk$set(
+  results    = 'show',
+  comment    = NA,
+  tidy       = FALSE,
+  fig.width  = 10,
+  fig.height = 6,
+  fig.path   = 'figure-png/'
+)
+# echoChunks <- FALSE
+options(width=80) #So the output is 50% wider than the default.
+read_chunk("./Final.R") #This allows knitr to call chunks tagged in the underlying *.R file.
+```
+
+
+```{r load-packages, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+```{r load-data, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+```{r declare-functions, echo=FALSE, results='show', message=FALSE, warning=FALSE}
+```
+
+
+# Question 2
+
+## a.
+
+The numerator degrees of freedom is: 19
+
+The denonminator degrees of freedom is: 3
+
+KJHFIUEHWEKJENHFIOU$HF(&$RY)
+
+## b. 
+
+The n for this model was: 26
+
+## c. 
+
+The root MSE is: 10.28945
+
+This value reflects the conditional standard deviation, or the standard deviation of the residual values.
+
+## d.
+
+The dependent variables mean value is: 61.34783
+
+## e.
+
+The best estimate for the PRE is 0.6210; this is the PRE when taking in to account the number of variables used to train the model.
+
+## f.
+
+The value of the intercept term is 162.87590
+
+This value reflects the predicted outcome when all independent variables are 0.
+
+## g.
+
+The variable with the greatest predictive influence when accounting for covariates is x3
+
+This can be observed in various ways, perhaps the most convincing is the t value, which is the largest t value for any predictor other than the intercept, furthermore the standardaized coefficeint is also the largest, suggesting the strongest conditioned relationship exists between the DV and x3.
+
+## h.
+
+A parameter estimate reflects the change in the DV in one unit change of the IV.
+
+For instance, using the raw coefficients, as x3 changes from 3 to 4; there is a decrease in y of -1.21032 units.
+
+## i. 
+
+# Question 3
+
+Model DF: 3
+
+Model Sum of Squares: `r (9.1226852 * qf(0.998, df1=3, df2=18)) * 3`
+
+Model Mean Square: `r 9.1226852 * qf(0.998, df1=3, df2=18)`
+
+Model F value: `r qf(0.998, df1=3, df2=18)`
+
+Error DF: 18
+
+Error Sum of Squares: `r 489.8181818 - (9.1226852 * qf(0.998, df1=3, df2=18))`
