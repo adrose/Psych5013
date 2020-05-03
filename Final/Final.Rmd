@@ -36,6 +36,11 @@ read_chunk("./Final.R") #This allows knitr to call chunks tagged in the underlyi
 ```{r declare-functions, echo=FALSE, results='show', message=FALSE, warning=FALSE}
 ```
 
+# Question 1
+
+You are interviewing for a job and you will be asked to teach a course in linear models.  To ascertain your competence and vision for the course, you are asked to give the 10 most important ideas, principles, or practical matters you have learned in this course.  To help, make sure to not simply list 10 things - be sure to justify your ranking of the 10 most important things ... why you chose the ones you did and why did you rank them as you did? At least 2000 words for a sufficient answer
+
+## 1. Homo
 
 # Question 2
 
@@ -85,23 +90,27 @@ For instance, using the raw coefficients, as x3 changes from 3 to 4; there is a 
 
 ## i. 
 
+A semi-partial correlation is the relationship between two variables when variance from one or more variables is removed from one of the variables of interest. WHen this relationship is squared it gives the coefficient of determination after controlling fro any shared variance from one of the predictors.
+
+A partial correlation describes the realtionship between 
+
 # Question 3
 
 Model DF: 3
 
-Model Sum of Squares: `r (9.1226852 * qf(0.998, df1=3, df2=18)) * 3`
+Model Sum of Squares: `r (9.1226852 * qf(0.9998, df1=3, df2=18)) * 3`
 
-Model Mean Square: `r 9.1226852 * qf(0.998, df1=3, df2=18)`
+Model Mean Square: `r 9.1226852 * qf(0.9998, df1=3, df2=18)`
 
-Model F value: `r qf(0.998, df1=3, df2=18)`
+Model F value: `r qf(0.9998, df1=3, df2=18)`
 
 Error DF: 18
 
-Error Sum of Squares: `r 489.8181818 - (9.1226852 * qf(0.998, df1=3, df2=18))`
+Error Sum of Squares: `r 489.8181818 - (9.1226852 * qf(0.9998, df1=3, df2=18))`
 
 Corrected Total DF: 21
 
-Root MSE: `r sqrt(9.1226852 * qf(0.998, df1=3, df2=18))`
+Root MSE: `r sqrt(9.1226852 * qf(0.9998, df1=3, df2=18))`
 
 ### Type 1 Anova Table
 
@@ -119,11 +128,11 @@ Sex Mean Square: `r 7.98 * 9.1226852`
 
 PROF$*$SEX DF: 1
 
-PROF$*$SEX Type I SS: `r qf(.2049, df1=3, df2=18) * 9.1226852`
+PROF$*$SEX Type I SS: `r qf(.2049, df1=1, df2=18) * 9.1226852`
 
-PROF$*$SEX Mean Square: `r qf(.2049, df1=3, df2=18) * 9.1226852`
+PROF$*$SEX Mean Square: `r qf(.2049, df1=1, df2=18) * 9.1226852`
 
-PROF$*$SEX F Value: `r qf(.2049, df1=3, df2=18)`
+PROF$*$SEX F Value: `r qf(.2049, df1=1, df2=18)`
 
 ### Type II Anova Table
 
@@ -135,7 +144,7 @@ PROF$*$SEX DF: 1
 
 PROF$*$SEX Type II SS: 0.6337719
 
-PROF$*$SEX F Value: `r qf(.2049, df1=3, df2=18)`
+PROF$*$SEX F Value: `r qf(.2049, df1=1, df2=18)`
 
 ### Type III Anova Table
 
@@ -145,8 +154,8 @@ SEX DF: 1
 
 PROF$*$SEX DF: 1
 
-PROF$*$SEX Type III SS: `r qf(.2049, df1=3, df2=18) * 9.1226852`
+PROF$*$SEX Type III SS: `r qf(.2049, df1=1, df2=18) * 9.1226852`
 
-PROF$*$SEX Mean Square: `r qf(.2049, df1=3, df2=18) * 9.1226852`
+PROF$*$SEX Mean Square: `r qf(.2049, df1=1, df2=18) * 9.1226852`
 
-PROF$*$SEX F Value: `r qf(.2049, df1=3, df2=18)`
+PROF$*$SEX F Value: `r qf(.2049, df1=1, df2=18)`
